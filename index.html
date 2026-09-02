@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GlucoGuía AP">
+<meta name="theme-color" content="#0b1a2a">
+<meta name="description" content="Guía rápida de consulta para diabetes tipo 2 en Atención Primaria: calculadoras, algoritmos de tratamiento y monitorización continua de glucosa, sin gestión de pacientes / Quick clinical reference for type 2 diabetes in Primary Care: calculators, treatment algorithms, and continuous glucose monitoring (ES/EN).">
+<title>⚡ GlucoGuía AP · Guía Rápida / Quick Reference</title>
+<link rel="manifest" href="data:application/json,{
+  &quot;name&quot;: &quot;GlucoGu&iacute;a AP&quot;,
+  &quot;short_name&quot;: &quot;GlucoGu&iacute;a&quot;,
+  &quot;start_url&quot;: &quot;.&quot;,
+  &quot;display&quot;: &quot;standalone&quot;,
+  &quot;background_color&quot;: &quot;#0b1a2a&quot;,
+  &quot;theme_color&quot;: &quot;#0b1a2a&quot;,
+  &quot;icons&quot;: [{&quot;src&quot;: &quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230b1a2a'/%3E%3Ctext x='50' y='68' font-size='44' fill='%234a9aaa' text-anchor='middle' font-family='sans-serif'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]
+}">
+<style>
+:root {
+  --bg:#0b1a2a; --bg-card:#122234; --surface:#1a2e42; --surface-2:#20384f; --border:#2a4058;
+  --accent:#4a9aaa; --accent-2:#6fc2d4; --gold:#e8b85a;
+  --green:#3fae7a; --green-soft:#173327; --amber:#dba33e; --amber-soft:#332a15; --red:#e0685f; --red-soft:#33191a; --blue:#5b8fd9; --blue-soft:#182a3f;
+  --text:#d8e2ec; --text-muted:#7f9cb0;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;
+  --mono:ui-monospace,'SF Mono',Consolas,monospace;
+  --radius:16px; --safe-top:env(safe-area-inset-top,12px); --safe-bottom:env(safe-area-inset-bottom,12px);
+}
+html[data-theme="light"] {
+  --bg:#eef2f6; --bg-card:#ffffff; --surface:#f4f7fa; --surface-2:#e9eef3; --border:#d3dde5;
+  --accent:#0d7a8c; --accent-2:#0f95a8; --gold:#b8791f;
+  --green:#1f8a5a; --green-soft:#dcf3e6; --amber:#a5700a; --amber-soft:#fbe9cf; --red:#c23f36; --red-soft:#fbdedc; --blue:#2f5fb0; --blue-soft:#dde7f9;
+  --text:#132433; --text-muted:#5a7182;
+}
+html[data-theme="light"] body{background-image:radial-gradient(ellipse at 8% 15%,#ffffff 0%,#e4ebf1 78%);}
+html[data-theme="light"] .app-title{background:linear-gradient(135deg,#0a5f6e,var(--accent));-webkit-background-clip:text;background-clip:text;}
+html[data-theme="light"] .app-subtitle{color:var(--text-muted);}
+html[data-theme="light"] .mock-phone,html[data-theme="light"] .mock-chart,html[data-theme="light"] .place-diagram{background:#0b1a2a;}
+html[data-theme="light"] .sensor-diagram{background:#0b1a2a;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;min-height:100dvh;-webkit-text-size-adjust:100%;touch-action:manipulation;overscroll-behavior:none;background-image:radial-gradient(ellipse at 8% 15%,#0f2638 0%,#060d16 78%);background-attachment:fixed;line-height:1.5;transition:background-color .2s,color .2s;}
+#app{max-width:1180px;margin:0 auto;padding:max(12px,var(--safe-top)) 12px max(90px,var(--safe-bottom));display:flex;flex-direction:column;gap:14px;}
+
+.app-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:12px 16px;background:var(--bg-card);border-radius:var(--radius);border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.45);position:sticky;top:max(8px,var(--safe-top));z-index:30;}
+.app-title{font-size:1.32rem;font-weight:700;background:linear-gradient(135deg,#a7d8e6,var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.2px;display:flex;align-items:center;gap:8px;}
+.app-subtitle{display:block;font-size:.66rem;font-weight:500;color:var(--text-muted);letter-spacing:.3px;margin-top:1px;}
+.lang-toggle{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:.72rem;font-weight:700;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:5px;font-family:var(--font);}
+.lang-toggle:active{transform:scale(.96);}
+.lang-block{display:none;}
+html[data-lang="es"] .lang-block[data-lang="es"]{display:block;}
+html[data-lang="en"] .lang-block[data-lang="en"]{display:block;}
+html[data-lang="es"] [data-lang-visible="en"]{display:none !important;}
+html[data-lang="en"] [data-lang-visible="es"]{display:none !important;}
+.header-badge{background:var(--surface);border:1px solid var(--border);border-radius:30px;padding:5px 12px;font-size:.66rem;color:var(--text-muted);font-weight:500;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.header-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;animation:pulse 2.2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+.tabs{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:4px;padding:2px 0;-webkit-overflow-scrolling:touch;scrollbar-width:none;position:sticky;top:calc(max(8px,var(--safe-top)) + 58px);z-index:29;background:linear-gradient(var(--bg) 70%,transparent);}
+.tabs::-webkit-scrollbar{display:none;}
+.tab-btn{flex:0 0 auto;padding:9px 15px;background:var(--bg-card);border:1px solid var(--border);border-radius:30px;color:var(--text-muted);font-weight:600;font-size:.85rem;cursor:pointer;white-space:nowrap;transition:.15s;font-family:var(--font);letter-spacing:.2px;}
+.tab-btn.active{color:#04141c;background:var(--accent);border-color:var(--accent);}
+.tab-btn:active{transform:scale(.96);}
+
+.panel{display:none;animation:fadeUp .25s ease;}
+.panel.active{display:block;}
+@keyframes fadeUp{0%{opacity:.4;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 18px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,.3);}
+@media (max-width:480px){
+  #app{padding:max(8px,var(--safe-top)) 8px max(84px,var(--safe-bottom));gap:10px;}
+  .card{padding:14px 13px;margin-bottom:10px;}
+  .app-header{padding:9px 12px;}
+}
+.card-title{font-size:1.02rem;font-weight:700;color:var(--accent-2);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-bottom:9px;border-bottom:1px dashed var(--border);}
+.card-title .badge{font-size:.58rem;background:var(--surface);padding:3px 10px;border-radius:20px;color:var(--text-muted);font-weight:500;letter-spacing:.2px;}
+.card-sub{font-size:.78rem;color:var(--text-muted);margin-bottom:10px;line-height:1.55;}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;}
+@media (max-width:620px){.grid-2{grid-template-columns:1fr;}}
+
+.stat-chip{background:var(--surface);border-radius:12px;padding:12px 12px;border:1px solid var(--border);text-align:center;}
+.stat-chip .number{font-size:1.5rem;font-weight:800;color:var(--gold);}
+.stat-chip .label{font-size:.64rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-top:2px;}
+
+.btn{background:var(--surface);border:1px solid var(--border);padding:11px 20px;border-radius:40px;color:var(--text);font-weight:600;font-size:.85rem;cursor:pointer;transition:.15s;font-family:var(--font);display:inline-flex;align-items:center;gap:7px;min-height:44px;justify-content:center;}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#04141c;}
+.btn-outline{background:transparent;border-color:var(--accent);color:var(--accent-2);}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:#221503;}
+.btn-sm{padding:8px 15px;font-size:.74rem;min-height:36px;}
+
+.flex{display:flex;gap:9px;flex-wrap:wrap;align-items:center;}
+.mt-2{margin-top:13px;}
+.mt-1{margin-top:7px;}
+
+.tag{display:inline-block;padding:3px 12px;border-radius:30px;font-size:.66rem;font-weight:600;background:var(--surface);color:var(--text-muted);border:1px solid var(--border);}
+.tag-accent{background:var(--accent);color:#04141c;border-color:var(--accent);}
+.tag-gold{background:var(--gold);color:#221503;border-color:var(--gold);}
+.tag-green{background:var(--green-soft);color:#7fe0ac;border-color:#245e42;}
+.tag-red{background:var(--red-soft);color:#f5a49e;border-color:#6a2c2c;}
+.tag-amber{background:var(--amber-soft);color:#f0c675;border-color:#6b5222;}
+html[data-theme="light"] .tag-green{color:#166a41;}
+html[data-theme="light"] .tag-red{color:#8a2a22;}
+html[data-theme="light"] .tag-amber{color:#6b4a08;}
+
+.divider{border:none;border-top:1px solid var(--border);margin:13px 0;}
+
+table.dtab{width:100%;border-collapse:collapse;font-size:.79rem;}
+table.dtab th{text-align:left;padding:8px 9px;background:var(--surface);color:var(--accent-2);font-weight:700;border-bottom:1px solid var(--border);white-space:nowrap;}
+table.dtab td{padding:8px 9px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;}
+table.dtab tr:last-child td{border-bottom:none;}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -2px;}
+
+.wiz-progress{display:flex;gap:6px;justify-content:center;margin-bottom:14px;}
+.wiz-dot{width:8px;height:8px;border-radius:50%;background:var(--border);}
+.wiz-dot.active{background:var(--accent);}
+.wiz-dot.done{background:var(--green);}
+.wiz-step{animation:fadeUp .2s ease;}
+.wiz-opt.picked{background:var(--accent);border-color:var(--accent);color:#04141c;}
+
+.calc-subtitle{font-size:.82rem;font-weight:700;color:var(--accent-2);margin:12px 0 8px;}
+.quick-card{border:2px solid var(--accent);}
+.quick-content{font-size:1rem;line-height:1.75;color:var(--text);}
+.quick-content h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin:14px 0 5px;}
+.quick-content h4:first-child{margin-top:0;}
+.quick-content .qbig{font-size:1.3rem;font-weight:800;color:var(--gold);}
+
+.subsection-label{font-size:.7rem;font-weight:800;color:#04141c;text-transform:uppercase;letter-spacing:1px;margin:14px 0 4px;background:var(--gold);display:inline-block;padding:3px 12px;border-radius:20px;}
+
+.sensor-grid-visual{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:13px;margin-top:14px;}
+.sensor-card-visual{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:13px;}
+.sensor-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.sensor-name{font-weight:700;font-size:.88rem;color:var(--text);}
+.sensor-diagram{background:#060d16;border-radius:10px;padding:2px;margin-bottom:10px;overflow:hidden;}
+.sensor-details ul{list-style:none;font-size:.76rem;color:var(--text-muted);line-height:1.75;}
+.sensor-details li strong{color:var(--text);}
+
+.placement-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;margin-top:14px;}
+.placement-row{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:8px 0;}
+.placement-item{text-align:center;}
+
+.mock-phone{background:#081521;border:1px solid var(--border);border-radius:20px;padding:16px 18px 14px;max-width:320px;margin:4px auto 0;}
+.mock-topbar{display:flex;justify-content:space-between;font-size:.66rem;color:var(--text-muted);margin-bottom:10px;}
+.mock-reading{display:flex;align-items:baseline;justify-content:center;gap:10px;}
+.mock-value{font-size:2.6rem;font-weight:800;color:#fff;line-height:1;}
+.mock-unit{font-size:.62rem;color:var(--text-muted);font-weight:500;margin-left:4px;}
+.mock-arrow{font-size:1.8rem;color:var(--accent-2);}
+.mock-caption{text-align:center;font-size:.66rem;color:var(--text-muted);margin-top:2px;margin-bottom:10px;}
+.mock-chart{background:#060d16;border-radius:10px;padding:6px 4px;overflow:hidden;}
+.mock-legend{display:flex;justify-content:center;gap:14px;font-size:.62rem;color:var(--text-muted);margin:8px 0 4px;}
+.mock-legend .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;}
+.mock-legend .dot.green{background:var(--green);} .mock-legend .dot.amber{background:var(--amber);} .mock-legend .dot.red{background:var(--red);}
+.mock-tir{margin-top:8px;}
+.mock-tir-bar{display:flex;height:10px;border-radius:6px;overflow:hidden;}
+.mock-tir-labels{display:flex;justify-content:space-between;font-size:.6rem;color:var(--text-muted);margin-top:5px;}
+.mock-gmi{display:flex;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);font-size:.68rem;color:var(--text-muted);}
+.mock-gmi b{color:var(--text);}
+
+.sensor-collapse summary::-webkit-details-marker{display:none;}
+.sensor-collapse summary{list-style:none;}
+.sensor-collapse summary:after{content:'▸';float:right;color:var(--text-muted);font-size:.8rem;transition:.15s;}
+.sensor-collapse[open] summary:after{content:'▾';}
+.sensor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px;}
+.sensor-card{background:var(--surface);border-radius:12px;padding:14px 15px;border:1px solid var(--border);}
+.sensor-card .name{font-weight:700;font-size:.98rem;color:var(--text);}
+.sensor-card .spec{font-size:.75rem;color:var(--text-muted);margin-top:4px;line-height:1.5;}
+.sensor-card .tag{margin-top:7px;}
+
+.agp-guide{background:var(--surface);border-radius:12px;padding:14px 16px;border-left:4px solid var(--accent);}
+.agp-guide .step{padding:8px 0;border-bottom:1px solid var(--border);}
+.agp-guide .step:last-child{border-bottom:none;}
+.agp-guide .step b{color:var(--gold);}
+
+.algo-step{background:var(--surface);border-radius:10px;padding:12px 15px;margin-bottom:8px;border-left:3px solid var(--accent);font-size:.86rem;line-height:1.5;}
+.algo-step .step-label{font-weight:700;color:var(--accent-2);font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px;}
+
+.drugbox{border-radius:12px;padding:13px 15px;margin-bottom:9px;font-size:.85rem;line-height:1.55;}
+.drugbox.b-green{background:var(--green-soft);border:1px solid #245e42;}
+.drugbox.b-blue{background:var(--blue-soft);border:1px solid #2a4a72;}
+.drugbox.b-amber{background:var(--amber-soft);border:1px solid #6b5222;}
+.drugbox.b-neutral{background:var(--surface);border:1px solid var(--border);}
+.drugbox strong{display:block;margin-bottom:3px;font-size:.92rem;}
+
+.result-box{background:var(--surface-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:12px;padding:15px 16px;font-size:.86rem;line-height:1.6;margin-top:12px;}
+.result-box.hidden{display:none;}
+.alert-box{border-radius:12px;padding:13px 15px;margin-bottom:10px;font-size:.85rem;line-height:1.55;border-left:4px solid;}
+.alert-box.red{background:var(--red-soft);border-color:var(--red);color:#f7c2bd;}
+.alert-box.amber{background:var(--amber-soft);border-color:var(--amber);color:#f3d9a0;}
+html[data-theme="light"] .alert-box.red{color:#8a2a22;}
+html[data-theme="light"] .alert-box.amber{color:#6b4a08;}
+
+select,input[type="number"],input[type="text"]{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;font-size:.86rem;font-family:var(--font);}
+label.flabel{font-size:.7rem;color:var(--text-muted);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.3px;}
+.field{margin-bottom:11px;}
+.chk-row{display:flex;align-items:center;gap:7px;font-size:.8rem;background:var(--surface);border:1px solid var(--border);padding:7px 12px;border-radius:20px;cursor:pointer;}
+.chk-row input{width:15px;height:15px;accent-color:var(--accent);}
+
+.ref-item{padding:12px 0;border-bottom:1px solid var(--border);font-size:.83rem;line-height:1.55;}
+.ref-item:last-child{border-bottom:none;}
+.ref-item .rnum{color:var(--gold);font-weight:700;}
+.ref-item a{color:var(--accent-2);text-decoration:underline;font-weight:600;word-break:break-word;}
+
+#install-banner{display:none;background:linear-gradient(90deg,#1a3a4a,#0f2638);border:1px solid var(--accent);border-radius:var(--radius);padding:12px 16px;align-items:center;justify-content:space-between;gap:12px;}
+#install-banner.show{display:flex;}
+#install-banner p{margin:0;font-size:.78rem;color:#b0c8d8;}
+
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:8px;}
+
+@media print{
+  #install-banner,.tabs,.btn,.app-header .header-badge{display:none !important;}
+  .panel{display:block !important;margin-bottom:26px;}
+  .card{break-inside:avoid;border:1px solid #ccc;box-shadow:none;}
+  body{background:#fff;color:#000;}
+  .card-title{color:#123;}
+  #app{max-width:100%;}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<div id="install-banner"><p data-i18n-es="📲 Añade GlucoGuía a tu pantalla de inicio para usarla como app." data-i18n-en="📲 Add GlucoGuía to your home screen to use it as an app.">📲 Añade GlucoGuía a tu pantalla de inicio para usarla como app.</p><button class="btn btn-primary btn-sm" id="btn-install" data-i18n-es="Instalar" data-i18n-en="Install">Instalar</button></div>
+
+<header class="app-header">
+  <div>
+    <div class="app-title">⚡ GlucoGuía</div>
+    <small class="app-subtitle">AP/PC · guía rápida · CSV AN LD</small>
+  </div>
+  <div class="flex" style="gap:8px;">
+    <button class="lang-toggle" id="btnThemeToggle" type="button"><span id="themeToggleIcon">🌙</span></button>
+    <button class="lang-toggle" id="btnLangToggle" type="button">🌐 <span id="langToggleLabel">EN</span></button>
+    <div class="header-badge"><span class="dot"></span> redGDPS 2026 · SED-SEEN-SEMERGEN</div>
+  </div>
+</header>
+
+<nav class="tabs" id="tabContainer">
+  <button class="tab-btn active" data-tab="inicio" data-i18n-es="📊 Inicio" data-i18n-en="📊 Home">📊 Inicio</button>
+  <button class="tab-btn" data-tab="mcg" data-i18n-es="📡 MCG" data-i18n-en="📡 CGM">📡 MCG</button>
+  <button class="tab-btn" data-tab="tratamiento" data-i18n-es="💊 Tratamiento" data-i18n-en="💊 Treatment">💊 Tratamiento</button>
+  <button class="tab-btn" data-tab="ejercicio" data-i18n-es="🏃 Ejercicio" data-i18n-en="🏃 Exercise">🏃 Ejercicio</button>
+  <button class="tab-btn" data-tab="referencias" data-i18n-es="📚 Referencias" data-i18n-en="📚 References">📚 Referencias</button>
+</nav>
+
+<!-- ============================================================
+     INICIO
+     ============================================================ -->
+<section class="panel active" id="panel-inicio">
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">📊 Resumen rápido <span class="badge">objetivos generales adulto sin fragilidad</span></div>
+    <div class="grid-3">
+      <div class="stat-chip"><div class="number">&lt;7%</div><div class="label">HbA1c/GMI objetivo</div></div>
+      <div class="stat-chip"><div class="number">&gt;70%</div><div class="label">TIR (70-180)</div></div>
+      <div class="stat-chip"><div class="number">&lt;36%</div><div class="label">CV variabilidad</div></div>
+      <div class="stat-chip"><div class="number">150'</div><div class="label">Ejercicio/semana</div></div>
+      <div class="stat-chip"><div class="number">&lt;4%</div><div class="label">TBR &lt;70 mg/dl</div></div>
+      <div class="stat-chip"><div class="number">&lt;1%</div><div class="label">TBR &lt;54 mg/dl</div></div>
+    </div>
+    <p class="card-sub mt-2">Objetivos individualizados: menos estrictos en fragilidad, esperanza de vida limitada o alto riesgo de hipoglucemia (ver pestaña Tratamiento).</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">📊 Quick summary <span class="badge">general targets, non-frail adult</span></div>
+    <div class="grid-3">
+      <div class="stat-chip"><div class="number">&lt;7%</div><div class="label">HbA1c/GMI target</div></div>
+      <div class="stat-chip"><div class="number">&gt;70%</div><div class="label">TIR (70-180)</div></div>
+      <div class="stat-chip"><div class="number">&lt;36%</div><div class="label">CV variability</div></div>
+      <div class="stat-chip"><div class="number">150'</div><div class="label">Exercise/week</div></div>
+      <div class="stat-chip"><div class="number">&lt;4%</div><div class="label">TBR &lt;70 mg/dl</div></div>
+      <div class="stat-chip"><div class="number">&lt;1%</div><div class="label">TBR &lt;54 mg/dl</div></div>
+    </div>
+    <p class="card-sub mt-2">Individualized targets: less strict in frailty, limited life expectancy, or high hypoglycemia risk (see Treatment tab).</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">📋 Plan de acción prioritario <span class="badge">estilo auditor clínico</span></div>
+    <div class="agp-guide">
+      <div class="step"><b>1.</b> Caracteriza mentalmente al paciente: años de evolución, IMC, comorbilidades (ECV, IC, ERC, hepatopatía metabólica), fragilidad y riesgo de hipoglucemia.</div>
+      <div class="step"><b>2.</b> Si hay ECV establecida, IC, ERC, obesidad o hepatopatía metabólica → prioriza <b>iSGLT2 / arGLP-1 / GIP-GLP1</b> independientemente de la HbA1c (redGDPS 2026).</div>
+      <div class="step"><b>3.</b> Si el paciente usa insulina basal y el control es subóptimo, o hay hipoglucemias → valora indicación de <b>MCG</b> (FreeStyle Libre 2/2+/3 o Dexcom ONE+ son los sistemas de uso preferente en AP).</div>
+      <div class="step"><b>4.</b> Prescribe ejercicio combinado (aeróbico + fuerza) y refuerza intervención en estilo de vida en cada visita.</div>
+      <div class="step"><b>5.</b> Reevalúa cada 3-6 meses; evita la inercia clínica si no se alcanza el objetivo individualizado en ese plazo.</div>
+    </div>
+    <div class="flex mt-2">
+      <button class="btn btn-outline btn-sm" data-goto="tratamiento">💊 Ver algoritmo</button>
+      <button class="btn btn-outline btn-sm" data-goto="mcg">📡 Ver MCG</button>
+    </div>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">📋 Priority action plan <span class="badge">clinical-auditor style</span></div>
+    <div class="agp-guide">
+      <div class="step"><b>1.</b> Characterize the patient mentally: years since diagnosis, BMI, comorbidities (CVD, HF, CKD, metabolic liver disease), frailty and hypoglycemia risk.</div>
+      <div class="step"><b>2.</b> If established CVD, HF, CKD, obesity, or metabolic liver disease → prioritize <b>SGLT2i / GLP-1 RA / GIP-GLP1</b> regardless of HbA1c (redGDPS 2026).</div>
+      <div class="step"><b>3.</b> If the patient is on basal insulin with suboptimal control, or has hypoglycemia → consider <b>CGM</b> (FreeStyle Libre 2/2+/3 or Dexcom ONE+ are the preferred systems in Primary Care).</div>
+      <div class="step"><b>4.</b> Prescribe combined exercise (aerobic + strength) and reinforce lifestyle intervention at every visit.</div>
+      <div class="step"><b>5.</b> Reassess every 3-6 months; avoid clinical inertia if the individualized target is not reached in that time.</div>
+    </div>
+    <div class="flex mt-2">
+      <button class="btn btn-outline btn-sm" data-goto="tratamiento">💊 View algorithm</button>
+      <button class="btn btn-outline btn-sm" data-goto="mcg">📡 View CGM</button>
+    </div>
+  </div>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">🆕 Novedades relevantes 2025-2026</div>
+    <ul style="list-style:none;font-size:.83rem;color:var(--text);line-height:1.8;">
+      <li>• La <b>metformina deja de ser primera línea universal</b>: en ECV, IC, ERC, obesidad o hepatopatía metabólica se recomienda iSGLT2/arGLP-1/GIP-GLP1 desde el inicio, con o sin metformina, según HbA1c basal.</li>
+      <li>• Se incorpora la <b>enfermedad hepática metabólica (MASLD/MASH)</b> como nuevo condicionante clínico en el algoritmo redGDPS 2026.</li>
+      <li>• Niveles de inicio de tratamiento simplificados a dos intensidades según glucemia media estimada (&gt;/&lt; ~200 mg/dl) o HbA1c (&gt;/&lt; 8,5%).</li>
+      <li>• Se refuerza la <b>intensificación precoz</b> para evitar inercia terapéutica y la individualización estricta en fragilidad.</li>
+    </ul>
+    <p class="card-sub mt-2">Fuente: Algoritmo de tratamiento de la DM2 redGDPS 2026 (ver Referencias).</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">🆕 Key updates 2025-2026</div>
+    <ul style="list-style:none;font-size:.83rem;color:var(--text);line-height:1.8;">
+      <li>• <b>Metformin is no longer universal first line</b>: in CVD, HF, CKD, obesity, or metabolic liver disease, an SGLT2i/GLP-1 RA/GIP-GLP1 is recommended from the start, with or without metformin, depending on baseline HbA1c.</li>
+      <li>• <b>Metabolic liver disease (MASLD/MASH)</b> is added as a new clinical driver in the redGDPS 2026 algorithm.</li>
+      <li>• Treatment-initiation levels simplified to two intensities based on estimated average glucose (&gt;/&lt; ~200 mg/dl) or HbA1c (&gt;/&lt; 8.5%).</li>
+      <li>• Greater emphasis on <b>early intensification</b> to avoid therapeutic inertia, and strict individualization in frailty.</li>
+    </ul>
+    <p class="card-sub mt-2">Source: redGDPS 2026 T2D treatment algorithm (see References).</p>
+  </div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     MCG
+     ============================================================ -->
+<section class="panel" id="panel-mcg">
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">📡 Monitorización continua de glucosa en AP <span class="badge">FreeStyle Libre · Dexcom ONE+</span></div>
+    <p class="card-sub">La MCG mide glucosa intersticial (retardo de 5-10 min respecto a la capilar). Se distingue entre monitorización flash (isCGM/MFG, requiere escaneo) y en tiempo real (rtCGM, envío continuo con alarmas). En Atención Primaria en España, los sistemas de uso mayoritario en personas con DM2 son <b>FreeStyle Libre 2/2+/3</b> y <b>Dexcom ONE+</b>, por disponibilidad, facilidad de uso y financiación en la mayoría de CCAA.</p>
+
+    <div class="tscroll mt-2">
+    <table class="dtab">
+      <tr><th>Sistema</th><th>Colocación</th><th>Frecuencia</th><th>Duración</th></tr>
+      <tr><td>📟 Libre 2 / 2+</td><td>Cara posterior del brazo</td><td>Al escanear (isCGM)</td><td>14 días</td></tr>
+      <tr><td>📟 Libre 3 / 3+</td><td>Cara posterior del brazo</td><td>Cada 1 min (rtCGM)</td><td>14-15 días</td></tr>
+      <tr><td>📟 Dexcom ONE+</td><td>Abdomen (adultos) o brazo</td><td>Cada 5 min (rtCGM)</td><td>10 días + 12h</td></tr>
+    </table>
+    </div>
+
+    <div class="flex mt-2">
+      <span class="tag">⚠️ Interferencias: paracetamol (Dexcom), ác. salicílico y ác. ascórbico (Libre) — ver ficha técnica</span>
+    </div>
+  </div>
+
+
+<p class="subsection-label">SISTEMAS</p>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">📡 Continuous glucose monitoring in Primary Care <span class="badge">FreeStyle Libre · Dexcom ONE+</span></div>
+    <p class="card-sub">CGM measures interstitial glucose (5-10 min lag versus capillary glucose). A distinction is made between flash monitoring (isCGM/intermittently scanned, requires scanning) and real-time monitoring (rtCGM, continuous transmission with alarms). In Spanish Primary Care, the systems most widely used in people with type 2 diabetes are <b>FreeStyle Libre 2/2+/3</b> and <b>Dexcom ONE+</b>, due to availability, ease of use, and reimbursement in most autonomous regions (CCAA).</p>
+
+    <div class="tscroll mt-2">
+    <table class="dtab">
+      <tr><th>System</th><th>Placement</th><th>Frequency</th><th>Duration</th></tr>
+      <tr><td>📟 Libre 2 / 2+</td><td>Back of upper arm</td><td>On scan (isCGM)</td><td>14 days</td></tr>
+      <tr><td>📟 Libre 3 / 3+</td><td>Back of upper arm</td><td>Every 1 min (rtCGM)</td><td>14-15 days</td></tr>
+      <tr><td>📟 Dexcom ONE+</td><td>Abdomen (adults) or arm</td><td>Every 5 min (rtCGM)</td><td>10 days + 12h</td></tr>
+    </table>
+    </div>
+
+    <div class="flex mt-2">
+      <span class="tag">⚠️ Interferences: acetaminophen/paracetamol (Dexcom), salicylic acid and ascorbic acid (Libre) — check manufacturer's instructions</span>
+    </div>
+  </div>
+
+
+<p class="subsection-label">SYSTEMS</p>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">📊 Comparativa de los sistemas más usados en AP</div>
+    <div class="tscroll">
+    <table class="dtab">
+      <tr><th>Característica</th><th>Libre 2 / 2+</th><th>Libre 3 / 3+</th><th>Dexcom ONE+</th></tr>
+      <tr><td>Tipo</td><td>Flash (MFG), alarma opcional en 2+</td><td>rtCGM tiempo real</td><td>rtCGM tiempo real</td></tr>
+      <tr><td>Duración sensor</td><td>14 días</td><td>14-15 días (3 Plus: 15d)</td><td>~10 días + periodo de gracia</td></tr>
+      <tr><td>Calibración</td><td>No requerida</td><td>No requerida</td><td>No requerida (calibrado de fábrica)</td></tr>
+      <tr><td>Frecuencia de lectura</td><td>Al escanear / 1 min si alarma activa</td><td>Cada 1 minuto, envío automático</td><td>Cada 5 minutos, envío automático</td></tr>
+      <tr><td>Alcance sensor-app</td><td>Escaneo por proximidad (NFC)</td><td>~10 m sin obstáculos</td><td>~6 m aprox.</td></tr>
+      <tr><td>Alarmas configurables</td><td>Sí (Libre 2/2+)</td><td>Sí, hipo/hiper e índice de predicción</td><td>Sí, configurables incl. predictivas</td></tr>
+      <tr><td>Edad mínima aprobada</td><td>&gt;4 años (&gt;2 con app compatible)</td><td>&gt;4 años</td><td>&gt;2 años</td></tr>
+      <tr><td>Embarazo</td><td>Autorizado</td><td>Autorizado</td><td>Autorizado</td></tr>
+      <tr><td>Comparte datos (familiares/clínico)</td><td>LibreLinkUp / LibreView</td><td>LibreLinkUp / LibreView</td><td>Dexcom Follow / Clarity</td></tr>
+      <tr><td>Uso preferente en AP (DM2 insulina basal)</td><td colspan="2" style="color:var(--accent-2);font-weight:600;">Muy alto — mayor implantación en CCAA</td><td style="color:var(--accent-2);font-weight:600;">Alto</td></tr>
+    </table>
+    </div>
+    <p class="card-sub mt-2">Datos de ficha técnica/fabricante y guía SED MCG 2026 · SEMERGEN 2024. Verificar siempre la disponibilidad y condiciones de financiación vigentes en tu CCAA antes de prescribir.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">📊 Comparison of the most widely used systems in Primary Care</div>
+    <div class="tscroll">
+    <table class="dtab">
+      <tr><th>Feature</th><th>Libre 2 / 2+</th><th>Libre 3 / 3+</th><th>Dexcom ONE+</th></tr>
+      <tr><td>Type</td><td>Flash (isCGM), optional alarm on 2+</td><td>Real-time rtCGM</td><td>Real-time rtCGM</td></tr>
+      <tr><td>Sensor life</td><td>14 days</td><td>14-15 days (3 Plus: 15d)</td><td>~10 days + grace period</td></tr>
+      <tr><td>Calibration</td><td>Not required</td><td>Not required</td><td>Not required (factory-calibrated)</td></tr>
+      <tr><td>Reading frequency</td><td>On scan / 1 min if alarm active</td><td>Every 1 minute, automatic</td><td>Every 5 minutes, automatic</td></tr>
+      <tr><td>Sensor-to-app range</td><td>Proximity scan (NFC)</td><td>~10 m unobstructed</td><td>~6 m approx.</td></tr>
+      <tr><td>Configurable alarms</td><td>Yes (Libre 2/2+)</td><td>Yes, low/high plus predictive</td><td>Yes, configurable incl. predictive</td></tr>
+      <tr><td>Approved minimum age</td><td>&gt;4 years (&gt;2 with compatible app)</td><td>&gt;4 years</td><td>&gt;2 years</td></tr>
+      <tr><td>Pregnancy</td><td>Approved</td><td>Approved</td><td>Approved</td></tr>
+      <tr><td>Data sharing (family/clinician)</td><td>LibreLinkUp / LibreView</td><td>LibreLinkUp / LibreView</td><td>Dexcom Follow / Clarity</td></tr>
+      <tr><td>Preferred use in Primary Care (T2D + basal insulin)</td><td colspan="2" style="color:var(--accent-2);font-weight:600;">Very high — widest uptake</td><td style="color:var(--accent-2);font-weight:600;">High</td></tr>
+    </table>
+    </div>
+    <p class="card-sub mt-2">Data from manufacturer instructions and the SED CGM guide 2026 · SEMERGEN 2024. Always verify current availability and local reimbursement before prescribing.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">🔍 Diferencias en detalle entre los sistemas de uso preferente en AP</div>
+
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>Tecnología de lectura.</b> El Libre 2/2+ funciona en modo flash (MFG): hay que escanear el sensor con el móvil o el lector para ver la glucosa en ese momento; el 2+ añade la posibilidad de recibir alarmas de hipo/hiper aunque el paciente no esté escaneando activamente, aunque el dato puntual sigue requiriendo el gesto de escaneo. El Libre 3/3+ y el Dexcom ONE+ son en cambio sistemas de tiempo real (rtCGM): el sensor envía el dato de forma continua y automática a la app, sin que el paciente tenga que hacer nada para "ver" la lectura actual.</p>
+
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>Frecuencia de envío del dato.</b> El Libre 3 transmite una lectura nueva cada minuto. El Dexcom ONE+ lo hace cada 5 minutos. El Libre 2 en modo flash no transmite de forma continua: solo se actualiza cuando el paciente escanea (o, en el 2+, cuando salta una alarma configurada). En la práctica, una frecuencia de 1 minuto ofrece una curva más fina y detecta antes los cambios rápidos que una de 5 minutos, aunque para la mayoría de decisiones en DM2 en AP esta diferencia rara vez es clínicamente determinante.</p>
+
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>Duración del sensor.</b> Los sensores Libre (2, 2+, 3 y 3 Plus) duran 14-15 días, por lo que el paciente cambia el sensor aproximadamente cada dos semanas. El Dexcom ONE+ dura unos 10 días más un breve periodo de gracia, lo que implica un recambio más frecuente (y, en general, un mayor número de sensores al año para el mismo periodo de uso).</p>
+
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>Alcance de la señal sensor-app.</b> El Libre 3 alcanza hasta unos 10 metros sin obstáculos entre el sensor y el teléfono, y el Dexcom ONE+ unos 6 metros aproximadamente, lo que permite dejar el móvil en otra habitación o bolsillo sin perder la conexión. El Libre 2 en modo flash no tiene "alcance" en ese sentido: al depender de un escaneo por proximidad (NFC), el paciente tiene que acercar físicamente el lector o el móvil al sensor cada vez que quiere consultar el valor.</p>
+
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>Alarmas.</b> El Libre 2 básico (sin el "+") no ofrece alarmas. El Libre 2+ sí las incorpora. El Libre 3/3+ y el Dexcom ONE+ permiten alarmas configurables de hipoglucemia e hiperglucemia, y también alarmas predictivas (avisan de que se va a entrar en rango bajo o alto antes de que ocurra, no solo cuando ya ha ocurrido).</p>
+
+    <div class="divider"></div>
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>Qué significa esto a la hora de elegir en consulta:</b></p>
+    <ul style="list-style:none;font-size:.85rem;color:var(--text);line-height:1.85;">
+      <li>🔸 Paciente con <b>baja adherencia tecnológica o que olvida escanear</b> (mayores, deterioro cognitivo leve, poca destreza con el móvil) → mejor un sistema de tiempo real (Libre 3 o Dexcom ONE+), que no depende de ese gesto activo.</li>
+      <li>🔸 Paciente con <b>hipoglucemias inadvertidas, hipoglucemias graves previas, o riesgo para terceros</b> (conductores profesionales, manejo de maquinaria) → priorizar un sistema con alarmas en tiempo real; el Libre 2 básico sin alarmas no cubre esta necesidad de seguridad.</li>
+      <li>🔸 Paciente que <b>prefiere el menor número de recambios posible</b> o tiene dificultad para la autoaplicación frecuente → Libre (14-15 días) frente a Dexcom ONE+ (~10 días).</li>
+      <li>🔸 Paciente con <b>apoyo familiar o supervisión a distancia</b> (cuidador, hijo/a que revisa las lecturas) → todos los sistemas permiten compartir datos, pero por plataformas distintas (LibreLinkUp/LibreView en Libre; Dexcom Follow/Clarity en Dexcom); conviene que toda la familia use la misma plataforma si ya hay otro miembro con diabetes en tratamiento.</li>
+      <li>🔸 Para la mayoría de pacientes DM2 con insulina basal y objetivo de simplemente reducir hipoglucemias y ajustar la pauta, la diferencia entre 1 y 5 minutos de frecuencia de lectura, o entre 6 y 10 metros de alcance, tiene poca relevancia clínica: el criterio de elección suele pesar más en la adherencia, la disponibilidad y la financiación en la CCAA que en estas diferencias técnicas finas.</li>
+    </ul>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">🔍 Detailed differences between the preferred systems in Primary Care</div>
+
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>Reading technology.</b> The Libre 2/2+ works in flash mode (isCGM): the sensor must be scanned with the phone or reader to see the current glucose value; the 2+ adds the ability to receive low/high alarms even while not actively scanning, though the point-in-time reading still requires the scan gesture. The Libre 3/3+ and Dexcom ONE+ are real-time systems (rtCGM) instead: the sensor sends the reading continuously and automatically to the app, with nothing required from the patient to "see" the current value.</p>
+
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>Transmission frequency.</b> The Libre 3 sends a new reading every minute. The Dexcom ONE+ does so every 5 minutes. The Libre 2 in flash mode doesn't transmit continuously: it only updates when the patient scans (or, on the 2+, when a configured alarm fires). In practice, a 1-minute frequency gives a finer curve and detects rapid changes sooner than a 5-minute one, though for most T2D decisions in Primary Care this difference is rarely clinically decisive.</p>
+
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>Sensor life.</b> Libre sensors (2, 2+, 3, and 3 Plus) last 14-15 days, so the patient replaces the sensor roughly every two weeks. The Dexcom ONE+ lasts about 10 days plus a short grace period, meaning more frequent replacement (and generally more sensors per year for the same period of use).</p>
+
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>Sensor-to-app signal range.</b> The Libre 3 reaches up to about 10 meters unobstructed, and the Dexcom ONE+ about 6 meters, letting the phone stay in another room or pocket without losing connection. The Libre 2 in flash mode has no "range" in that sense: relying on a proximity scan (NFC), the patient must physically bring the reader or phone close to the sensor every time they want to check the value.</p>
+
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>Alarms.</b> The basic Libre 2 (without the "+") has no alarms. The Libre 2+ does include them. The Libre 3/3+ and Dexcom ONE+ allow configurable low- and high-glucose alarms, plus predictive alarms (warning that a low or high is about to occur, not only once it already has).</p>
+
+    <div class="divider"></div>
+    <p style="font-size:.85rem;color:var(--text);line-height:1.65;"><b>What this means when choosing in the clinic:</b></p>
+    <ul style="list-style:none;font-size:.85rem;color:var(--text);line-height:1.85;">
+      <li>🔸 A patient with <b>low tech adherence or who forgets to scan</b> (older adults, mild cognitive impairment, limited smartphone skills) → a real-time system (Libre 3 or Dexcom ONE+) is better, since it doesn't depend on that active gesture.</li>
+      <li>🔸 A patient with <b>unnoticed hypoglycemia, prior severe hypoglycemia, or risk to third parties</b> (professional drivers, machinery) → prioritize a system with real-time alarms; the basic alarm-free Libre 2 doesn't cover this safety need.</li>
+      <li>🔸 A patient who <b>prefers the fewest possible sensor changes</b> or struggles with frequent self-application → Libre (14-15 days) versus Dexcom ONE+ (~10 days).</li>
+      <li>🔸 A patient with <b>family support or remote monitoring</b> (a caregiver or child checking readings) → all systems allow data sharing, but on different platforms (LibreLinkUp/LibreView for Libre; Dexcom Follow/Clarity for Dexcom); it helps if the whole family uses the same platform when another member also has diabetes.</li>
+      <li>🔸 For most T2D patients on basal insulin whose goal is simply reducing hypoglycemia and adjusting the regimen, the difference between 1- and 5-minute reading frequency, or 6 versus 10 meters of range, has little clinical relevance: the choice usually hinges more on adherence, availability, and local reimbursement than on these fine technical differences.</li>
+    </ul>
+  </div>
+</div>
+<div class="lang-block" data-lang="es">
+<details class="card sensor-collapse">
+    <summary class="card-title" style="cursor:pointer;">🧭 Otros sistemas disponibles <span class="badge">uso minoritario en AP-DM2 · toca para ver</span></summary>
+    <div class="sensor-grid mt-2">
+      <div class="sensor-card"><div class="name">Medtronic Guardian 4</div><div class="spec">rtCGM, requiere calibración ocasional. Vinculado a sistemas de asa (MiniMed 780G). Uso casi exclusivo en DM1 con bomba, seguimiento en endocrinología.</div><span class="tag">Uso hospitalario/DM1</span></div>
+      <div class="sensor-card"><div class="name">Eversense E3</div><div class="spec">Sensor implantable subcutáneo, duración ~6 meses. Requiere procedimiento de inserción/retirada por profesional. Nicho muy limitado en AP.</div><span class="tag">Implantable</span></div>
+      <div class="sensor-card"><div class="name">Dexcom G7</div><div class="spec">rtCGM de última generación, sensor único integrado (10 días). Disponibilidad y financiación variable; en AP-DM2 su uso es aún minoritario frente a ONE+.</div><span class="tag">Emergente</span></div>
+    </div>
+    <p class="card-sub mt-2">Se muestran por completitud, pero el foco de esta app —y el de la práctica habitual en AP con DM2— son <b>FreeStyle Libre 2/2+/3</b> y <b>Dexcom ONE+</b>.</p>
+  </details>
+</div>
+<div class="lang-block" data-lang="en">
+<details class="card sensor-collapse">
+    <summary class="card-title" style="cursor:pointer;">🧭 Other available systems <span class="badge">minority use in Primary Care T2D · tap to view</span></summary>
+    <div class="sensor-grid mt-2">
+      <div class="sensor-card"><div class="name">Medtronic Guardian 4</div><div class="spec">rtCGM, requires occasional calibration. Linked to closed-loop systems (MiniMed 780G). Used almost exclusively in pump-treated T1D, followed by endocrinology.</div><span class="tag">Hospital/T1D use</span></div>
+      <div class="sensor-card"><div class="name">Eversense E3</div><div class="spec">Implantable subcutaneous sensor, ~6-month duration. Requires a professional insertion/removal procedure. Very limited niche in Primary Care.</div><span class="tag">Implantable</span></div>
+      <div class="sensor-card"><div class="name">Dexcom G7</div><div class="spec">Latest-generation rtCGM, single integrated sensor (10 days). Availability and reimbursement variable; still a minority choice versus ONE+ in Primary Care T2D.</div><span class="tag">Emerging</span></div>
+    </div>
+    <p class="card-sub mt-2">Shown for completeness, but the focus of this app — and of routine Primary Care T2D practice — is <b>FreeStyle Libre 2/2+/3</b> and <b>Dexcom ONE+</b>.</p>
+  </details>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">✅ Indicaciones prioritarias de MCG en DM2 + insulina basal</div>
+    <p class="card-sub">Según el documento de consenso SED-SEEN-SEMERGEN-SEMFyC-SEMG sobre MCG en DM2 en tratamiento con insulina basal:</p>
+    <ul style="list-style:none;font-size:.85rem;color:var(--text);line-height:1.8;">
+      <li>✅ Control glucémico subóptimo: HbA1c por encima del objetivo individualizado pese a tratamiento adecuado</li>
+      <li>✅ Hipoglucemias graves o recurrentes, sintomáticas o no percibidas</li>
+      <li>✅ Alta variabilidad glucémica documentada</li>
+      <li>✅ Profesiones con riesgo para terceros (conductores profesionales, maquinaria, seguridad)</li>
+      <li>✅ Edad ≥65 años con fragilidad o riesgo de dependencia, si mejora la seguridad y calidad de vida</li>
+      <li>✅ Necesidad de optimizar y facilitar el ajuste de la pauta insulínica</li>
+      <li>✅ Ayuno prolongado (p. ej. Ramadán) en pacientes seleccionados</li>
+    </ul>
+    <div class="flex mt-2">
+      <span class="tag tag-red">⚠️ Valorar exclusión si: falta de motivación, rechazo del dispositivo no resuelto tras educación, incapacidad para el autocuidado sin apoyo</span>
+    </div>
+    <p class="card-sub mt-2">La financiación efectiva depende de la resolución de cartera común del SNS y su desarrollo en cada CCAA; confirmar criterios locales de prescripción antes de indicarla.</p>
+  </div>
+
+
+<p class="subsection-label">INDICACIÓN Y EDUCACIÓN</p>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">✅ Priority indications for CGM in T2D + basal insulin</div>
+    <p class="card-sub">Per the SED-SEEN-SEMERGEN-SEMFyC-SEMG consensus document on CGM in T2D patients on basal insulin therapy:</p>
+    <ul style="list-style:none;font-size:.85rem;color:var(--text);line-height:1.8;">
+      <li>✅ Suboptimal glycemic control: HbA1c above the individualized target despite appropriate treatment</li>
+      <li>✅ Severe or recurrent hypoglycemia, symptomatic or unnoticed</li>
+      <li>✅ Documented high glycemic variability</li>
+      <li>✅ Occupations with risk to third parties (professional drivers, machinery, security)</li>
+      <li>✅ Age ≥65 with frailty or risk of dependency, if it improves safety and quality of life</li>
+      <li>✅ Need to optimize and facilitate adjustment of the insulin regimen</li>
+      <li>✅ Prolonged fasting (e.g., Ramadan) in selected patients</li>
+    </ul>
+    <div class="flex mt-2">
+      <span class="tag tag-red">⚠️ Consider exclusion if: lack of motivation, device rejection not resolved after education, inability for self-care without support</span>
+    </div>
+    <p class="card-sub mt-2">Actual reimbursement depends on the Spanish National Health System's (SNS) common benefits package and its rollout in each autonomous region (CCAA); confirm local prescribing criteria before indicating it. Outside Spain, check equivalent national/regional coverage criteria.</p>
+  </div>
+
+
+<p class="subsection-label">INDICATION AND EDUCATION</p>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">📱 Vista simulada: lo que ve el paciente/profesional <span class="badge">esquema orientativo, no interfaz real</span></div>
+    <p class="card-sub">Representación genérica del tipo de pantalla que muestran estos sistemas (app del sensor o informe AGP), útil para explicar al paciente qué va a ver antes de indicarle un sensor.</p>
+    <div class="mock-phone">
+      <div class="mock-topbar"><span>🔋 Sensor: <b>día 9 de 14</b></span><span>📶</span></div>
+      <div class="mock-reading">
+        <div class="mock-value">142<span class="mock-unit">mg/dl</span></div>
+        <div class="mock-arrow" title="Tendencia estable">→</div>
+      </div>
+      <div class="mock-caption">Tendencia estable · última lectura hace 2 min</div>
+      <div class="mock-legend"><span><i class="dot amber"></i>&gt;180</span><span><i class="dot green"></i>70-180</span><span><i class="dot red"></i>&lt;70</span></div>
+      <div class="mock-tir">
+        <div class="mock-tir-bar"><span style="width:6%;background:var(--red);"></span><span style="width:78%;background:var(--green);"></span><span style="width:16%;background:var(--amber);"></span></div>
+        <div class="mock-tir-labels"><span>TBR 6%</span><span>TIR 78%</span><span>TAR 16%</span></div>
+      </div>
+      <div class="mock-gmi"><span>GMI (14 días) <b>6,9%</b></span><span>CV <b>32%</b></span></div>
+    </div>
+    <p class="card-sub mt-2">El informe AGP descargable (LibreView / Dexcom Clarity) añade el promedio de los últimos 14 días, el patrón por franjas horarias y las métricas GMI/CV completas — es el documento que se revisa en consulta, no solo la app del móvil.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">📱 Simulated view: what the patient/clinician sees <span class="badge">illustrative schematic, not a real interface</span></div>
+    <p class="card-sub">Generic representation of the type of screen these systems show (sensor app or AGP report), useful for explaining to the patient what they'll see before prescribing a sensor.</p>
+    <div class="mock-phone">
+      <div class="mock-topbar"><span>🔋 Sensor: <b>day 9 of 14</b></span><span>📶</span></div>
+      <div class="mock-reading">
+        <div class="mock-value">142<span class="mock-unit">mg/dl</span></div>
+        <div class="mock-arrow" title="Stable trend">→</div>
+      </div>
+      <div class="mock-caption">Stable trend · last reading 2 min ago</div>
+      <div class="mock-legend"><span><i class="dot amber"></i>&gt;180</span><span><i class="dot green"></i>70-180</span><span><i class="dot red"></i>&lt;70</span></div>
+      <div class="mock-tir">
+        <div class="mock-tir-bar"><span style="width:6%;background:var(--red);"></span><span style="width:78%;background:var(--green);"></span><span style="width:16%;background:var(--amber);"></span></div>
+        <div class="mock-tir-labels"><span>TBR 6%</span><span>TIR 78%</span><span>TAR 16%</span></div>
+      </div>
+      <div class="mock-gmi"><span>GMI (14d) <b>6.9%</b></span><span>CV <b>32%</b></span></div>
+    </div>
+    <p class="card-sub mt-2">The downloadable AGP report (LibreView / Dexcom Clarity) adds the 14-day average, the pattern by time of day, and full GMI/CV metrics — this is the document reviewed in clinic, not just the phone app.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">🎓 Educación rápida al paciente</div>
+    <p class="card-sub">Diagrama de colocación por sistema disponible al principio de esta pestaña, en "Zonas de colocación recomendadas".</p>
+    <div style="font-size:.85rem;color:var(--text);line-height:1.7;margin-top:6px;">
+      <p><b>Colocación:</b> cara posterior del brazo (Libre) o zona abdominal/brazo (Dexcom), según ficha técnica. Piel limpia y seca, rotar zona de aplicación, no reutilizar.</p>
+      <p><b>Flechas de tendencia:</b> ↑↑/↓↓ cambio rápido (&gt;2-3 mg/dl/min) → actuar antes de que se instaure la hipo/hiperglucemia, no solo mirar el valor puntual.</p>
+      <p><b>Alarmas:</b> configurar umbrales personalizados (p. ej. hipo 70-80, hiper 180-200 mg/dl) para evitar fatiga de alarmas y mejorar la adherencia.</p>
+      <p><b>Confirmar con capilar cuando:</b> síntomas discordantes con la lectura, cambios muy rápidos de glucosa, sospecha de fallo del sensor, o antes de decisiones terapéuticas críticas si el sistema lo indica.</p>
+      <p><b>Interferencias conocidas:</b> dosis altas de ácido ascórbico (vitamina C) y, en modelos antiguos, paracetamol a dosis altas pueden alterar la lectura; consultar ficha técnica vigente del sensor concreto.</p>
+    </div>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">🎓 Quick patient education</div>
+    <p class="card-sub">A per-system placement diagram is available at the top of this tab, under "Recommended placement sites."</p>
+    <div style="font-size:.85rem;color:var(--text);line-height:1.7;margin-top:6px;">
+      <p><b>Placement:</b> back of the upper arm (Libre) or abdomen/arm area (Dexcom), per manufacturer instructions. Clean, dry skin; rotate the application site; do not reuse.</p>
+      <p><b>Trend arrows:</b> ↑↑/↓↓ rapid change (&gt;2-3 mg/dl/min) → act before hypo/hyperglycemia sets in, not just react to the point-in-time value.</p>
+      <p><b>Alarms:</b> set personalized thresholds (e.g., low 70-80, high 180-200 mg/dl) to avoid alarm fatigue and improve adherence.</p>
+      <p><b>Confirm with a capillary check when:</b> symptoms don't match the reading, glucose is changing very rapidly, sensor failure is suspected, or before critical treatment decisions if the system prompts it.</p>
+      <p><b>Known interferences:</b> high-dose ascorbic acid (vitamin C) and, on older models, high-dose acetaminophen/paracetamol can affect the reading; check the current instructions for the specific sensor.</p>
+    </div>
+  </div>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">🔔 Configuración de alarmas</div>
+    <div class="tscroll">
+    <table class="dtab">
+      <tr><th>Alarma</th><th>Umbral orientativo AP</th><th>Objetivo clínico</th></tr>
+      <tr><td>Hipoglucemia urgente</td><td>54 mg/dl</td><td>Alerta de seguridad no desactivable en la mayoría de sistemas; actuar de inmediato</td></tr>
+      <tr><td>Hipoglucemia</td><td>70-80 mg/dl (individualizar)</td><td>Anticipar antes de hipoglucemia sintomática</td></tr>
+      <tr><td>Hiperglucemia</td><td>180-200 mg/dl (individualizar)</td><td>Detectar excursiones sin generar fatiga de alarmas</td></tr>
+      <tr><td>Predictiva de bajada/subida</td><td>Según disponibilidad del modelo</td><td>Anticipación adicional en pautas complejas o hipoglucemias inadvertidas</td></tr>
+      <tr><td>Pérdida de señal</td><td>Por defecto del fabricante</td><td>Detectar fallo de sensor/conexión, especialmente relevante si hay dependencia de la app para decisiones</td></tr>
+    </table>
+    </div>
+    <p class="card-sub mt-2">Umbrales demasiado ajustados (p. ej. hiper &lt;140) generan <b>fatiga de alarmas</b> y abandono del uso: ajustar de forma individualizada, revisando en cada visita si el paciente sigue respondiendo a ellas.</p>
+  </div>
+
+
+<p class="subsection-label">INTERPRETACIÓN AVANZADA DEL AGP</p>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">🔔 Alarm configuration</div>
+    <div class="tscroll">
+    <table class="dtab">
+      <tr><th>Alarm</th><th>Reference threshold (Primary Care)</th><th>Clinical goal</th></tr>
+      <tr><td>Urgent low</td><td>54 mg/dl</td><td>Safety alert that can't be disabled on most systems; act immediately</td></tr>
+      <tr><td>Low</td><td>70-80 mg/dl (individualize)</td><td>Anticipate before symptomatic hypoglycemia</td></tr>
+      <tr><td>High</td><td>180-200 mg/dl (individualize)</td><td>Detect excursions without causing alarm fatigue</td></tr>
+      <tr><td>Predictive rise/fall</td><td>Depends on model availability</td><td>Extra anticipation in complex regimens or unnoticed hypoglycemia</td></tr>
+      <tr><td>Signal loss</td><td>Manufacturer default</td><td>Detect sensor/connection failure, especially relevant if decisions depend on the app</td></tr>
+    </table>
+    </div>
+    <p class="card-sub mt-2">Thresholds set too tight (e.g., high &lt;140) cause <b>alarm fatigue</b> and discontinued use: adjust individually, checking at every visit whether the patient is still responding to them.</p>
+  </div>
+
+
+
+<p class="subsection-label">ADVANCED AGP INTERPRETATION</p>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">📈 Interpretación del AGP en 6 pasos</div>
+    <div class="agp-guide">
+      <div class="step"><b>① Calidad de datos:</b> el informe es fiable si el sensor ha estado activo &gt;70% del tiempo (idealmente 14 días de registro).</div>
+      <div class="step"><b>② Tiempo en Rango (TIR):</b> objetivo &gt;70% en 70-180 mg/dl para la mayoría de adultos; &gt;50% si fragilidad o alto riesgo de hipoglucemia.</div>
+      <div class="step"><b>③ Tiempo Bajo Rango (TBR):</b> &lt;4% en 54-69 mg/dl (nivel 1) y &lt;1% en &lt;54 mg/dl (nivel 2, hipoglucemia clínicamente significativa).</div>
+      <div class="step"><b>④ Tiempo Sobre Rango (TAR):</b> &lt;25% en 181-250 mg/dl y &lt;5% en &gt;250 mg/dl.</div>
+      <div class="step"><b>⑤ Variabilidad glucémica (CV):</b> objetivo ≤36%; por encima sugiere patrón inestable, revisar pauta y horarios.</div>
+      <div class="step"><b>⑥ GMI (Indicador de Manejo de Glucosa):</b> estimación de la HbA1c calculada a partir de la glucosa media del sensor (no es una medición directa). Útil para seguimiento entre analíticas, pero puede diferir de la HbA1c real de laboratorio (anemia, hemoglobinopatías, ERC, embarazo, o registros cortos/poco representativos); no sustituye a la HbA1c analítica.</div>
+    </div>
+    <div class="flex mt-2">
+      <span class="tag tag-green">📈 Curva AGP ideal: plana, estrecha y centrada en el rango objetivo</span>
+    </div>
+    <p class="card-sub mt-2">Criterios basados en el consenso internacional de Tiempo en Rango (Battelino T, et al. Diabetes Care 2019) adoptado por ADA/EASD/SED.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">📈 AGP interpretation in 6 steps</div>
+    <div class="agp-guide">
+      <div class="step"><b>① Data quality:</b> the report is reliable if the sensor was active &gt;70% of the time (ideally 14 days of data).</div>
+      <div class="step"><b>② Time in Range (TIR):</b> target &gt;70% in 70-180 mg/dl for most adults; &gt;50% if frail or at high hypoglycemia risk.</div>
+      <div class="step"><b>③ Time Below Range (TBR):</b> &lt;4% in 54-69 mg/dl (level 1) and &lt;1% in &lt;54 mg/dl (level 2, clinically significant hypoglycemia).</div>
+      <div class="step"><b>④ Time Above Range (TAR):</b> &lt;25% in 181-250 mg/dl and &lt;5% in &gt;250 mg/dl.</div>
+      <div class="step"><b>⑤ Glycemic variability (CV):</b> target ≤36%; above this suggests an unstable pattern — review the regimen and schedule.</div>
+      <div class="step"><b>⑥ GMI (Glucose Management Indicator):</b> an estimated HbA1c calculated from the sensor's average glucose (not a direct measurement). Useful for tracking between lab tests, but it can differ from actual lab HbA1c (anemia, hemoglobinopathies, CKD, pregnancy, or short/unrepresentative recording periods); it does not replace lab HbA1c.</div>
+    </div>
+    <div class="flex mt-2">
+      <span class="tag tag-green">📈 Ideal AGP curve: flat, narrow, and centered on the target range</span>
+    </div>
+    <p class="card-sub mt-2">Criteria based on the international consensus on Time in Range (Battelino T, et al. Diabetes Care 2019), adopted by ADA/EASD/SED.</p>
+  </div>
+</div>
+  <div class="card">
+    <div class="card-title" data-i18n-es="🧮 Interpretador de métricas AGP" data-i18n-en="🧮 AGP metrics interpreter">🧮 Interpretador de métricas AGP <span class="badge" data-i18n-es="introduce los datos del informe" data-i18n-en="enter the report data">introduce los datos del informe</span></div>
+    <p class="card-sub" data-i18n-es="Introduce las métricas del informe AGP (LibreView / Dexcom Clarity) del paciente activo y obtén una lectura automática según los criterios de arriba." data-i18n-en="Enter the active patient's AGP report metrics (LibreView / Dexcom Clarity) to get an automatic reading based on the criteria above.">Introduce las métricas del informe AGP (LibreView / Dexcom Clarity) del paciente activo y obtén una lectura automática según los criterios de arriba.</p>
+    <div class="grid-3">
+      <div class="field"><label class="flabel" data-i18n-es="% uso del sensor" data-i18n-en="Sensor active %">% uso del sensor</label><input type="number" id="agpUso" placeholder="ej. 85" data-ph-es="ej. 85" data-ph-en="e.g. 85" min="0" max="100"></div>
+      <div class="field"><label class="flabel">TIR 70-180 (%)</label><input type="number" id="agpTir" placeholder="ej. 68" data-ph-es="ej. 68" data-ph-en="e.g. 68" min="0" max="100"></div>
+      <div class="field"><label class="flabel">CV (%)</label><input type="number" id="agpCv" placeholder="ej. 32" data-ph-es="ej. 32" data-ph-en="e.g. 32" min="0" max="150"></div>
+      <div class="field"><label class="flabel">TBR &lt;70 (%)</label><input type="number" id="agpTbr70" placeholder="ej. 3" data-ph-es="ej. 3" data-ph-en="e.g. 3" min="0" max="100"></div>
+      <div class="field"><label class="flabel">TBR &lt;54 (%)</label><input type="number" id="agpTbr54" placeholder="ej. 0.5" data-ph-es="ej. 0.5" data-ph-en="e.g. 0.5" step="0.1" min="0" max="100"></div>
+      <div class="field"><label class="flabel">TAR &gt;250 (%)</label><input type="number" id="agpTar250" placeholder="ej. 6" data-ph-es="ej. 6" data-ph-en="e.g. 6" min="0" max="100"></div>
+      <div class="field"><label class="flabel">GMI (%)</label><input type="number" id="agpGmi" placeholder="ej. 6.9" data-ph-es="ej. 6.9" data-ph-en="e.g. 6.9" step="0.1" min="3" max="15"></div>
+      <div class="field"><label class="flabel" data-i18n-es="HbA1c laboratorio (opcional)" data-i18n-en="Lab HbA1c (optional)">HbA1c laboratorio (opcional)</label><input type="number" id="agpHba1cLab" placeholder="ej. 7.2" data-ph-es="ej. 7.2" data-ph-en="e.g. 7.2" step="0.1" min="3" max="15"></div>
+    </div>
+    <button class="btn btn-primary btn-sm" id="btnInterpretarAGP" data-i18n-es="📈 Interpretar" data-i18n-en="📈 Interpret">📈 Interpretar</button>
+    <div id="agpResultado" class="result-box hidden"></div>
+  </div>
+
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">🎯 Objetivos de métricas MCG según perfil</div>
+    <div class="tscroll">
+    <table class="dtab">
+      <tr><th>Perfil</th><th>TIR (70-180)</th><th>TBR &lt;70</th><th>TBR &lt;54</th><th>GMI/HbA1c</th></tr>
+      <tr><td>Adulto DM2, sin fragilidad</td><td>&gt;70%</td><td>&lt;4%</td><td>&lt;1%</td><td>&lt;7%</td></tr>
+      <tr><td>Fragilidad / alto riesgo hipo</td><td>&gt;50%</td><td>&lt;1%</td><td>&lt;1%</td><td>&lt;8-8,5%</td></tr>
+      <tr><td>Embarazo (DM pregestacional)</td><td>&gt;70% (63-140 mg/dl)</td><td>&lt;4%</td><td>&lt;1%</td><td>individualizado</td></tr>
+    </table>
+    </div>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">🎯 CGM metric targets by profile</div>
+    <div class="tscroll">
+    <table class="dtab">
+      <tr><th>Profile</th><th>TIR (70-180)</th><th>TBR &lt;70</th><th>TBR &lt;54</th><th>GMI/HbA1c</th></tr>
+      <tr><td>Adult T2D, not frail</td><td>&gt;70%</td><td>&lt;4%</td><td>&lt;1%</td><td>&lt;7%</td></tr>
+      <tr><td>Frailty / high hypo risk</td><td>&gt;50%</td><td>&lt;1%</td><td>&lt;1%</td><td>&lt;8-8.5%</td></tr>
+      <tr><td>Pregnancy (pre-existing diabetes)</td><td>&gt;70% (63-140 mg/dl)</td><td>&lt;4%</td><td>&lt;1%</td><td>individualized</td></tr>
+    </table>
+    </div>
+  </div>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">➡️ De los hallazgos del AGP a la decisión terapéutica</div>
+    <div class="tscroll">
+    <table class="dtab">
+      <tr><th>Hallazgo en el AGP</th><th>Implicación terapéutica</th></tr>
+      <tr><td>TBR &lt;70 elevado, sobre todo nocturno</td><td>Reducir dosis de insulina basal o secretagogo; revisar horario de la cena y ejercicio vespertino</td></tr>
+      <tr><td>Hiperglucemia matutina aislada (efecto alba)</td><td>Valorar ajuste de la insulina basal o cambio de horario de administración, antes que aumentar dosis global</td></tr>
+      <tr><td>Picos postprandiales marcados</td><td>Valorar pauta basal-plus, ajuste de arGLP-1/GIP-GLP1, o revisión dietética del tipo de comida asociada</td></tr>
+      <tr><td>CV &gt;36% (alta variabilidad)</td><td>Revisar regularidad de horarios de comida/ejercicio/medicación antes de intensificar tratamiento; descartar hipoglucemias no percibidas</td></tr>
+      <tr><td>TIR &lt;70% sin hipoglucemias significativas</td><td>Intensificar tratamiento: añadir fármaco con beneficio cardio-renal o ajustar insulina al alza</td></tr>
+      <tr><td>Uso del sensor &lt;70%</td><td>El informe no es fiable para decidir; reforzar educación/adherencia antes de tomar decisiones farmacológicas</td></tr>
+    </table>
+    </div>
+  </div>
+
+
+<p class="subsection-label">ORGANIZACIÓN DE LA CONSULTA</p>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">➡️ From AGP findings to treatment decisions</div>
+    <div class="tscroll">
+    <table class="dtab">
+      <tr><th>AGP finding</th><th>Treatment implication</th></tr>
+      <tr><td>High TBR &lt;70, especially overnight</td><td>Reduce basal insulin or secretagogue dose; review dinner timing and evening exercise</td></tr>
+      <tr><td>Isolated morning hyperglycemia (dawn phenomenon)</td><td>Consider adjusting basal insulin or changing the administration time, rather than increasing the overall dose</td></tr>
+      <tr><td>Marked postprandial spikes</td><td>Consider a basal-plus regimen, a GLP-1 RA/GIP-GLP1 adjustment, or a dietary review of the associated meal</td></tr>
+      <tr><td>CV &gt;36% (high variability)</td><td>Review regularity of meal/exercise/medication timing before intensifying treatment; rule out unnoticed hypoglycemia</td></tr>
+      <tr><td>TIR &lt;70% without significant hypoglycemia</td><td>Intensify treatment: add a drug with cardio-renal benefit or increase insulin</td></tr>
+      <tr><td>Sensor active &lt;70% of the time</td><td>The report isn't reliable for decisions; reinforce education/adherence before making pharmacological decisions</td></tr>
+    </table>
+    </div>
+  </div>
+
+
+<p class="subsection-label">CLINIC ORGANIZATION</p>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">📅 Calendario de revisiones</div>
+    <div class="algo-step"><span class="step-label">A las 2 semanas de iniciar la MCG</span>Revisión de enfermería: adherencia al sensor, dudas técnicas, primera valoración del % de uso (&gt;70% necesario para un AGP fiable).</div>
+    <div class="algo-step"><span class="step-label">1er informe AGP (4 semanas)</span>Revisión médica: interpretación completa (calidad de datos, TIR, TBR, TAR, CV) y primera decisión terapéutica si procede.</div>
+    <div class="algo-step"><span class="step-label">Seguimiento trimestral</span>Revisión conjunta médico-enfermería: reevaluación de objetivos, ajuste de alarmas, refuerzo educativo, coordinación con HbA1c analítica.</div>
+    <div class="algo-step"><span class="step-label">Revisión anual / cambio de situación clínica</span>Reevaluar si se mantienen los criterios de indicación o si procede la retirada del sistema (mejora sostenida, pérdida de motivación, cambio de pauta).</div>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">📅 Follow-up schedule</div>
+    <div class="algo-step"><span class="step-label">2 weeks after starting CGM</span>Nursing review: sensor adherence, technical questions, initial assessment of active-time % (&gt;70% needed for a reliable AGP).</div>
+    <div class="algo-step"><span class="step-label">First AGP report (4 weeks)</span>Physician review: full interpretation (data quality, TIR, TBR, TAR, CV) and first treatment decision if warranted.</div>
+    <div class="algo-step"><span class="step-label">Quarterly follow-up</span>Joint physician-nursing review: reassess targets, adjust alarms, reinforce education, coordinate with lab HbA1c.</div>
+    <div class="algo-step"><span class="step-label">Annual review / change in clinical status</span>Reassess whether indication criteria are still met or whether the system should be discontinued (sustained improvement, loss of motivation, regimen change).</div>
+  </div>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">🩺👩‍⚕️ Reparto de roles: Medicina vs Enfermería</div>
+    <div class="grid-2">
+      <div class="drugbox b-blue"><strong>Medicina de familia</strong>
+        Indicación clínica del sensor según criterios de consenso · valoración de comorbilidad y objetivo individualizado de HbA1c/TIR · interpretación del AGP para decisiones farmacológicas (ajuste de fármacos, insulinización, intensificación) · decisión de mantener/retirar la MCG según respuesta.
+      </div>
+      <div class="drugbox b-green"><strong>Enfermería</strong>
+        Educación inicial y colocación del sensor · entrenamiento en el uso de la app y configuración de alarmas junto al paciente · resolución de dudas técnicas (fallos de lectura, adherencia del sensor, calibración de la app) · primera lectura del informe y detección de patrones a comentar en consulta médica · refuerzo educativo en visitas de seguimiento y en programas de educación diabetológica.
+      </div>
+    </div>
+    <p class="card-sub mt-2">En la práctica ambos roles se solapan y se coordinan: la enfermería suele ser el primer punto de contacto técnico y educativo, mientras que la decisión terapéutica sobre el tratamiento farmacológico corresponde a medicina. Ajustar según la organización y competencias de cada centro.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">🩺👩‍⚕️ Division of roles: Physician vs. Nurse</div>
+    <div class="grid-2">
+      <div class="drugbox b-blue"><strong>Family physician</strong>
+        Clinical indication of the sensor per consensus criteria · assessment of comorbidity and individualized HbA1c/TIR target · AGP interpretation for pharmacological decisions (drug adjustment, insulinization, intensification) · decision to continue/discontinue CGM based on response.
+      </div>
+      <div class="drugbox b-green"><strong>Nurse</strong>
+        Initial education and sensor placement · training the patient on app use and alarm setup · troubleshooting technical issues (reading failures, sensor adherence, app calibration) · first read of the report and pattern-spotting to discuss at the physician visit · ongoing educational reinforcement at follow-up visits and diabetes education programs.
+      </div>
+    </div>
+    <p class="card-sub mt-2">In practice both roles overlap and coordinate: nursing is usually the first technical and educational point of contact, while pharmacological treatment decisions fall to the physician. Adjust according to each practice's organization and staff competencies.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     TRATAMIENTO
+     ============================================================ -->
+<section class="panel" id="panel-tratamiento">
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">💊 Algoritmo de decisión farmacológica <span class="badge">redGDPS 2026 · enfoque cardio-renal-metabólico</span></div>
+    <p class="card-sub"><b>Principio clave:</b> intervención en estilo de vida + control de factores de riesgo cardiovascular desde el diagnóstico. Priorizar fármacos con beneficio cardiorrenal demostrado (iSGLT2, arGLP-1, GIP/GLP-1) de forma independiente a la cifra de HbA1c cuando existe ECV establecida, insuficiencia cardíaca, enfermedad renal crónica, obesidad o enfermedad hepática metabólica (MASLD/MASH).</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">💊 Pharmacological decision algorithm <span class="badge">redGDPS 2026 · cardio-renal-metabolic approach</span></div>
+    <p class="card-sub"><b>Key principle:</b> lifestyle intervention + cardiovascular risk factor control from diagnosis. Prioritize drugs with proven cardiorenal benefit (SGLT2i, GLP-1 RA, GIP/GLP-1) independently of the HbA1c figure when there is established CVD, heart failure, chronic kidney disease, obesity, or metabolic liver disease (MASLD/MASH).</p>
+  </div>
+</div>
+  <div class="card">
+    <div class="card-title" data-i18n-es="🧭 Ayuda rápida a la decisión por condicionante clínico" data-i18n-en="🧭 Quick decision helper by clinical driver">🧭 Ayuda rápida a la decisión por condicionante clínico <span class="badge" data-i18n-es="consulta manual, sin guardar" data-i18n-en="manual lookup, not saved">consulta manual, sin guardar</span></div>
+    <div class="field">
+      <label class="flabel" data-i18n-es="Condicionante clínico principal" data-i18n-en="Main clinical driver">Condicionante clínico principal</label>
+      <select id="selComorbilidad">
+        <option value="" data-i18n-es="Seleccionar..." data-i18n-en="Select...">Seleccionar...</option>
+        <option value="ecv" data-i18n-es="Enfermedad cardiovascular establecida / RCV muy alto" data-i18n-en="Established cardiovascular disease / very high CV risk">Enfermedad cardiovascular establecida / RCV muy alto</option>
+        <option value="ic" data-i18n-es="Insuficiencia cardíaca" data-i18n-en="Heart failure">Insuficiencia cardíaca</option>
+        <option value="erc" data-i18n-es="Enfermedad renal crónica" data-i18n-en="Chronic kidney disease">Enfermedad renal crónica</option>
+        <option value="obesidad" data-i18n-es="Obesidad / sobrepeso (IMC ≥30)" data-i18n-en="Obesity / overweight (BMI ≥30)">Obesidad / sobrepeso (IMC ≥30)</option>
+        <option value="hepatopatia" data-i18n-es="Enfermedad hepática metabólica (MASLD/MASH)" data-i18n-en="Metabolic liver disease (MASLD/MASH)">Enfermedad hepática metabólica (MASLD/MASH)</option>
+        <option value="fragil" data-i18n-es="Paciente frágil / anciano" data-i18n-en="Frail / elderly patient">Paciente frágil / anciano</option>
+        <option value="ninguna" data-i18n-es="Sin condicionante clínico predominante" data-i18n-en="No predominant clinical driver">Sin condicionante clínico predominante</option>
+      </select>
+    </div>
+    <div id="resultadoTrat" class="result-box hidden"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" data-i18n-es="🧙 Flujo guiado de decisión" data-i18n-en="🧙 Guided decision flow">🧙 Flujo guiado de decisión <span class="badge" data-i18n-es="3 preguntas" data-i18n-en="3 questions">3 preguntas</span></div>
+    <div class="wiz-progress"><span class="wiz-dot active" data-dot="1"></span><span class="wiz-dot" data-dot="2"></span><span class="wiz-dot" data-dot="3"></span></div>
+
+    <div id="wizStep1" class="wiz-step">
+      <p class="flabel" data-i18n-es="1. ¿Condicionante clínico principal?" data-i18n-en="1. Main clinical driver?">1. ¿Condicionante clínico principal?</p>
+      <div class="flex">
+        <button class="btn btn-outline btn-sm wiz-opt" data-group="cond" data-val="ecv" data-i18n-es="ECV" data-i18n-en="CVD">ECV</button>
+        <button class="btn btn-outline btn-sm wiz-opt" data-group="cond" data-val="ic" data-i18n-es="IC" data-i18n-en="HF">IC</button>
+        <button class="btn btn-outline btn-sm wiz-opt" data-group="cond" data-val="erc" data-i18n-es="ERC" data-i18n-en="CKD">ERC</button>
+        <button class="btn btn-outline btn-sm wiz-opt" data-group="cond" data-val="obesidad" data-i18n-es="Obesidad" data-i18n-en="Obesity">Obesidad</button>
+        <button class="btn btn-outline btn-sm wiz-opt" data-group="cond" data-val="hepatopatia" data-i18n-es="Hepatopatía metabólica" data-i18n-en="Metabolic liver disease">Hepatopatía metabólica</button>
+        <button class="btn btn-outline btn-sm wiz-opt" data-group="cond" data-val="fragil" data-i18n-es="Frágil / anciano" data-i18n-en="Frail / elderly">Frágil / anciano</button>
+        <button class="btn btn-outline btn-sm wiz-opt" data-group="cond" data-val="ninguna" data-i18n-es="Ninguno" data-i18n-en="None">Ninguno</button>
+      </div>
+    </div>
+
+    <div id="wizStep2" class="wiz-step" style="display:none;">
+      <p class="flabel" data-i18n-es="2. ¿HbA1c actual &gt;8,5%?" data-i18n-en="2. Current HbA1c &gt;8.5%?">2. ¿HbA1c actual &gt;8,5%?</p>
+      <div class="flex">
+        <button class="btn btn-outline btn-sm wiz-opt" data-group="hba1c" data-val="si" data-i18n-es="Sí" data-i18n-en="Yes">Sí</button>
+        <button class="btn btn-outline btn-sm wiz-opt" data-group="hba1c" data-val="no" data-i18n-es="No" data-i18n-en="No">No</button>
+      </div>
+    </div>
+
+    <div id="wizStep3" class="wiz-step" style="display:none;">
+      <p class="flabel" data-i18n-es="3. ¿Ya está en tratamiento con insulina?" data-i18n-en="3. Already on insulin?">3. ¿Ya está en tratamiento con insulina?</p>
+      <div class="flex">
+        <button class="btn btn-outline btn-sm wiz-opt" data-group="insulina" data-val="si" data-i18n-es="Sí" data-i18n-en="Yes">Sí</button>
+        <button class="btn btn-outline btn-sm wiz-opt" data-group="insulina" data-val="no" data-i18n-es="No" data-i18n-en="No">No</button>
+      </div>
+    </div>
+
+    <div id="wizResultado" class="result-box hidden"></div>
+    <div class="flex mt-2"><button class="btn btn-outline btn-sm" id="btnWizReset" data-i18n-es="↺ Reiniciar" data-i18n-en="↺ Reset">↺ Reiniciar</button></div>
+  </div>
+
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">🧪 Priorización por grupo farmacológico <span class="badge">DCI + dosis de inicio + marca de referencia</span></div>
+    <div class="drugbox b-green"><strong>iSGLT2</strong> — empagliflozina (Jardiance®) 10 mg/24h, dapagliflozina (Forxiga®) 10 mg/24h, canagliflozina (Invokana®) 100 mg/24h. Preferentes en: insuficiencia cardíaca (cualquier fracción de eyección), ERC con FG reducido o albuminuria, ECV establecida (especialmente si IMC &lt;30), riesgo cardiovascular alto. Ajustar/suspender según filtrado glomerular y ficha técnica vigente.</div>
+    <div class="drugbox b-blue"><strong>arGLP-1 / GIP-GLP1</strong> — semaglutida inyectable (Ozempic®) 0,25 mg/semana (dosis de inicio, titular), dulaglutida (Trulicity®) 0,75-1,5 mg/semana, tirzepatida (Mounjaro®) 2,5 mg/semana (dosis de inicio, titular). Preferentes en: obesidad, ECV con IMC ≥30, necesidad de pérdida ponderal, ERC con IMC elevado.</div>
+    <div class="drugbox b-amber"><strong>Metformina</strong> 425-850 mg/12-24h, escalada progresiva hasta 2.000-2.550 mg/día según tolerancia. Sigue siendo un pilar terapéutico habitual y de bajo coste, pero <u>ya no se considera primera línea universal</u>: en presencia de ECV/IC/ERC/obesidad/hepatopatía metabólica, el algoritmo 2026 prioriza iSGLT2/arGLP-1/GIP-GLP1 desde el inicio, con o sin metformina asociada. Ajustar dosis o suspender según FG (contraindicada si FG &lt;30 ml/min/1,73m²; precaución 30-45).</div>
+    <div class="drugbox b-neutral"><strong>Insulina basal</strong> — glargina U300 (Toujeo®) o degludec (Tresiba®), 10 U/día o 0,1-0,2 U/kg/día de inicio, preferibles en AP por menor riesgo de hipoglucemia frente a NPH. Indicada cuando no se alcanza el objetivo con combinación oral/inyectable no insulínica, en catabolismo franco, o HbA1c muy elevada (&gt;9-10%) con clínica cardinal.</div>
+    <div class="drugbox b-neutral"><strong>Otros grupos</strong> (iDPP4, pioglitazona, repaglinida, sulfonilureas): papel secundario en la intensificación, según tolerancia, función renal y objetivo de seguridad. Las sulfonilureas se evitan preferentemente por riesgo de hipoglucemia, sobre todo en fragilidad.</div>
+    <p class="card-sub mt-1">Dosis y marcas orientativas de referencia (puede haber genéricos y otras marcas comercializadas); confirmar siempre con la ficha técnica vigente y el visado/financiación de tu CCAA. Prescribir por denominación común internacional (DCI) según recomendación habitual del SNS.</p>
+    <p class="card-sub mt-1">Fuente: Algoritmo de tratamiento de la DM2 redGDPS 2026; ADA Standards of Care in Diabetes 2025 (Diabetes Care 2025;48(Suppl 1)); fichas técnicas EMA de cada principio activo.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">🧪 Prioritization by drug class <span class="badge">INN + starting dose + reference brand</span></div>
+    <div class="drugbox b-green"><strong>SGLT2i</strong> — empagliflozin (Jardiance®) 10 mg/24h, dapagliflozin (Forxiga®) 10 mg/24h, canagliflozin (Invokana®) 100 mg/24h. Preferred in: heart failure (any ejection fraction), CKD with reduced eGFR or albuminuria, established CVD (especially if BMI &lt;30), high cardiovascular risk. Adjust/discontinue per eGFR and current prescribing information.</div>
+    <div class="drugbox b-blue"><strong>GLP-1 RA / GIP-GLP1</strong> — injectable semaglutide (Ozempic®) 0.25 mg/week (starting dose, titrate), dulaglutide (Trulicity®) 0.75-1.5 mg/week, tirzepatide (Mounjaro®) 2.5 mg/week (starting dose, titrate). Preferred in: obesity, CVD with BMI ≥30, need for weight loss, CKD with elevated BMI.</div>
+    <div class="drugbox b-amber"><strong>Metformin</strong> 425-850 mg/12-24h, gradually titrated up to 2,000-2,550 mg/day as tolerated. Remains a common, low-cost mainstay, but <u>is no longer considered universal first line</u>: when CVD/HF/CKD/obesity/metabolic liver disease is present, the 2026 algorithm prioritizes an SGLT2i/GLP-1 RA/GIP-GLP1 from the start, with or without metformin. Adjust dose or discontinue per eGFR (contraindicated if eGFR &lt;30 ml/min/1.73m²; caution 30-45).</div>
+    <div class="drugbox b-neutral"><strong>Basal insulin</strong> — glargine U300 (Toujeo®) or degludec (Tresiba®), 10 U/day or 0.1-0.2 U/kg/day to start, preferred in Primary Care for lower hypoglycemia risk than NPH. Indicated when target isn't reached with a non-insulin oral/injectable combination, in overt catabolism, or with very high HbA1c (&gt;9-10%) and cardinal symptoms.</div>
+    <div class="drugbox b-neutral"><strong>Other classes</strong> (DPP-4i, pioglitazone, repaglinide, sulfonylureas): secondary role in intensification, depending on tolerance, renal function, and safety goals. Sulfonylureas are generally avoided due to hypoglycemia risk, especially in frailty.</div>
+    <p class="card-sub mt-1">Doses and brand names are reference examples only (generics and other marketed brands may exist); always confirm with current prescribing information and local reimbursement rules. Prescribe by international nonproprietary name (INN/generic name) per standard practice.</p>
+    <p class="card-sub mt-1">Source: redGDPS 2026 T2D treatment algorithm; ADA Standards of Care in Diabetes 2025 (Diabetes Care 2025;48(Suppl 1)); EMA prescribing information for each active substance.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">🎯 Objetivos de control glucémico individualizados</div>
+    <div class="tscroll">
+    <table class="dtab">
+      <tr><th>Perfil</th><th>HbA1c objetivo</th><th>Comentario</th></tr>
+      <tr><td>Adulto general, sin comorbilidad relevante</td><td>&lt;7%</td><td>Objetivo estándar, minimizar riesgo de complicaciones microvasculares</td></tr>
+      <tr><td>Larga esperanza de vida, poca comorbilidad</td><td>6,5%</td><td>Individualizar si se logra sin hipoglucemias significativas</td></tr>
+      <tr><td>Comorbilidad importante / riesgo de hipoglucemia</td><td>7,5-8%</td><td>Priorizar seguridad frente a control estricto</td></tr>
+      <tr><td>Fragilidad avanzada / esperanza de vida limitada</td><td>8-8,5%</td><td>Evitar hipoglucemias y síntomas de hiperglucemia</td></tr>
+    </table>
+    </div>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">🎯 Individualized glycemic control targets</div>
+    <div class="tscroll">
+    <table class="dtab">
+      <tr><th>Profile</th><th>HbA1c target</th><th>Comment</th></tr>
+      <tr><td>General adult, no relevant comorbidity</td><td>&lt;7%</td><td>Standard target, minimizes microvascular complication risk</td></tr>
+      <tr><td>Long life expectancy, little comorbidity</td><td>6.5%</td><td>Individualize if achieved without significant hypoglycemia</td></tr>
+      <tr><td>Significant comorbidity / hypoglycemia risk</td><td>7.5-8%</td><td>Prioritize safety over tight control</td></tr>
+      <tr><td>Advanced frailty / limited life expectancy</td><td>8-8.5%</td><td>Avoid hypoglycemia and hyperglycemic symptoms</td></tr>
+    </table>
+    </div>
+  </div>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">💉 Algoritmo de insulinización (resumen AP)</div>
+    <div class="algo-step"><span class="step-label">Inicio basal</span>10 U/día o 0,1-0,2 U/kg/día. Preferibles análogos de acción prolongada (glargina U300, degludec) por menor riesgo de hipoglucemia frente a NPH.</div>
+    <div class="algo-step"><span class="step-label">Titulación</span>Ajustar +2-4 U cada 2-3 días según glucemia basal en ayunas, hasta alcanzar objetivo (habitualmente 80-130 mg/dl en ayunas, individualizar).</div>
+    <div class="algo-step"><span class="step-label">Si hipoglucemia</span>Reducir 2-4 U o ≥10-20% de la dosis total; reevaluar causa (horario, ingesta, ejercicio).</div>
+    <div class="algo-step"><span class="step-label">Si no se alcanza control con basal</span>Valorar pauta basal-plus (añadir 1 dosis de rápida antes de la comida con mayor excursión postprandial) o intensificar con arGLP-1/GIP-GLP1 si aún no se ha usado.</div>
+    <div class="algo-step"><span class="step-label">Bolo-basal</span>3 dosis de rápida antes de las comidas principales + basal; ajustar según glucemias postprandiales y patrón individual.</div>
+    <div class="algo-step"><span class="step-label">Candidatos preferentes a MCG</span>Pauta bolo-basal, ≥6 punciones/día, o criterios del consenso SED-SEEN-SEMERGEN-SEMFyC-SEMG (ver pestaña MCG).</div>
+    <p class="card-sub mt-1">📌 En fragilidad o alto riesgo de hipoglucemia grave: objetivos menos estrictos (HbA1c 8-8,5%), simplificar pauta y evitar sobretratamiento.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">💉 Insulinization algorithm (Primary Care summary)</div>
+    <div class="algo-step"><span class="step-label">Basal start</span>10 U/day or 0.1-0.2 U/kg/day. Long-acting analogs (glargine U300, degludec) preferred for lower hypoglycemia risk than NPH.</div>
+    <div class="algo-step"><span class="step-label">Titration</span>Adjust +2-4 U every 2-3 days based on fasting glucose, until reaching target (typically 80-130 mg/dl fasting, individualize).</div>
+    <div class="algo-step"><span class="step-label">If hypoglycemia</span>Reduce 2-4 U or ≥10-20% of total dose; reassess the cause (timing, intake, exercise).</div>
+    <div class="algo-step"><span class="step-label">If basal alone doesn't control</span>Consider a basal-plus regimen (add 1 rapid-acting dose before the meal with the largest postprandial excursion) or intensify with a GLP-1 RA/GIP-GLP1 if not yet used.</div>
+    <div class="algo-step"><span class="step-label">Basal-bolus</span>3 rapid-acting doses before main meals + basal; adjust per postprandial readings and individual pattern.</div>
+    <div class="algo-step"><span class="step-label">Preferred CGM candidates</span>Basal-bolus regimen, ≥6 finger-sticks/day, or SED-SEEN-SEMERGEN-SEMFyC-SEMG consensus criteria (see CGM tab).</div>
+    <p class="card-sub mt-1">📌 In frailty or high risk of severe hypoglycemia: less strict targets (HbA1c 8-8.5%), simplify the regimen, and avoid overtreatment.</p>
+  </div>
+</div>
+  <div class="card">
+    <div class="card-title" data-i18n-es="🧮 Calculadora de dosis de insulina" data-i18n-en="🧮 Insulin dose calculator">🧮 Calculadora de dosis de insulina <span class="badge" data-i18n-es="herramienta de referencia — no prescribe" data-i18n-en="reference tool — does not prescribe">herramienta de referencia — no prescribe</span></div>
+    <div class="alert-box amber" data-i18n-es="⚠️ Cálculo orientativo de apoyo. No sustituye la valoración clínica individual (función renal, hipoglucemias previas, ingesta prevista). Requiere supervisión facultativa antes de administrar cualquier dosis." data-i18n-en="⚠️ Reference calculation only. Does not replace individual clinical judgment (renal function, prior hypoglycemia, expected intake). Requires clinician supervision before administering any dose.">⚠️ Cálculo orientativo de apoyo. No sustituye la valoración clínica individual (función renal, hipoglucemias previas, ingesta prevista). Requiere supervisión facultativa antes de administrar cualquier dosis.</div>
+
+    <h4 class="calc-subtitle" data-i18n-es="Dosis de inicio de insulina basal (por peso)" data-i18n-en="Basal insulin starting dose (by weight)">Dosis de inicio de insulina basal (por peso)</h4>
+    <div class="grid-2">
+      <div class="field"><label class="flabel" data-i18n-es="Peso (kg)" data-i18n-en="Weight (kg)">Peso (kg)</label><input type="number" id="insPeso" placeholder="ej. 82" data-ph-es="ej. 82" data-ph-en="e.g. 82" min="0"></div>
+      <div class="field"><label class="flabel">&nbsp;</label><button class="btn btn-primary btn-sm" id="btnCalcularBasal" style="width:100%;" data-i18n-es="Calcular dosis de inicio" data-i18n-en="Calculate starting dose">Calcular dosis de inicio</button></div>
+    </div>
+    <div id="insBasalResultado" class="result-box hidden"></div>
+
+    <div class="divider"></div>
+
+    <h4 class="calc-subtitle" data-i18n-es="Dosis de corrección (factor de sensibilidad — regla 1800/1500)" data-i18n-en="Correction dose (sensitivity factor — 1800/1500 rule)">Dosis de corrección (factor de sensibilidad — regla 1800/1500)</h4>
+    <div class="grid-2">
+      <div class="field"><label class="flabel" data-i18n-es="Dosis total diaria de insulina (U/día)" data-i18n-en="Total daily insulin dose (U/day)">Dosis total diaria de insulina (U/día)</label><input type="number" id="insDTD" placeholder="ej. 36" data-ph-es="ej. 36" data-ph-en="e.g. 36" min="1"></div>
+      <div class="field"><label class="flabel" data-i18n-es="Tipo de insulina de corrección" data-i18n-en="Correction insulin type">Tipo de insulina de corrección</label>
+        <select id="insTipoCorreccion">
+          <option value="1800" data-i18n-es="Análogo rápido (lispro/aspart/glulisina) — regla 1800" data-i18n-en="Rapid-acting analog (lispro/aspart/glulisine) — 1800 rule">Análogo rápido (lispro/aspart/glulisina) — regla 1800</option>
+          <option value="1500" data-i18n-es="Insulina regular/humana — regla 1500" data-i18n-en="Regular/human insulin — 1500 rule">Insulina regular/humana — regla 1500</option>
+        </select>
+      </div>
+      <div class="field"><label class="flabel" data-i18n-es="Glucemia actual (mg/dl)" data-i18n-en="Current glucose (mg/dl)">Glucemia actual (mg/dl)</label><input type="number" id="insGlucemiaActual" placeholder="ej. 260" data-ph-es="ej. 260" data-ph-en="e.g. 260" min="0"></div>
+      <div class="field"><label class="flabel" data-i18n-es="Glucemia objetivo (mg/dl)" data-i18n-en="Target glucose (mg/dl)">Glucemia objetivo (mg/dl)</label><input type="number" id="insGlucemiaObjetivo" placeholder="ej. 140" data-ph-es="ej. 140" data-ph-en="e.g. 140" min="0" value="140"></div>
+    </div>
+    <button class="btn btn-primary btn-sm" id="btnCalcularCorreccion" data-i18n-es="Calcular dosis de corrección" data-i18n-en="Calculate correction dose">Calcular dosis de corrección</button>
+    <div id="insCorreccionResultado" class="result-box hidden"></div>
+    <p class="card-sub mt-2" data-i18n-es="Fórmulas: FSI = 1800 ÷ DTD (análogo rápido) o 1500 ÷ DTD (regular); Dosis de corrección = (glucemia actual − objetivo) ÷ FSI. Regla estándar de educación diabetológica (Walsh &amp; Roberts); válida en adultos con DM2, no en DM1 con cetoacidosis ni en pediatría sin supervisión de endocrinología." data-i18n-en="Formulas: ISF = 1800 ÷ TDD (rapid-acting analog) or 1500 ÷ TDD (regular); Correction dose = (current glucose − target) ÷ ISF. Standard diabetes-education rule (Walsh &amp; Roberts); valid in adults with T2D, not in T1D with ketoacidosis nor in pediatrics without endocrinology supervision.">Fórmulas: FSI = 1800 ÷ DTD (análogo rápido) o 1500 ÷ DTD (regular); Dosis de corrección = (glucemia actual − objetivo) ÷ FSI. Regla estándar de educación diabetológica (Walsh &amp; Roberts); válida en adultos con DM2, no en DM1 con cetoacidosis ni en pediatría sin supervisión de endocrinología.</p>
+  </div>
+
+
+</section>
+
+<!-- ============================================================
+     EJERCICIO
+     ============================================================ -->
+<section class="panel" id="panel-ejercicio">
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">🏃 Prescripción de ejercicio en DM2 <span class="badge">Guía RECORD SEEN · consenso ADA/EASD</span></div>
+    <div class="grid-2">
+      <div>
+        <p style="font-weight:700;color:var(--gold);">Aeróbico</p>
+        <p style="font-size:.84rem;color:var(--text-muted);line-height:1.6;">≥150 min/semana de intensidad moderada (o 75 min vigorosa), repartidos en ≥3 días, sin más de 2 días consecutivos sin actividad. Ej: caminar a paso ligero, bicicleta, natación.</p>
+      </div>
+      <div>
+        <p style="font-weight:700;color:var(--gold);">Fuerza / resistencia</p>
+        <p style="font-size:.84rem;color:var(--text-muted);line-height:1.6;">2-3 sesiones/semana en días no consecutivos, 8-10 ejercicios, 1-3 series de 10-15 repeticiones. Mancuernas, bandas elásticas, peso corporal.</p>
+      </div>
+    </div>
+    <div class="flex mt-2">
+      <span class="tag tag-accent">🏋️ Combinar aeróbico + fuerza mejora la sensibilidad a la insulina y puede reducir la HbA1c hasta ~0,6-0,9%</span>
+      <span class="tag">🪑 Interrumpir el sedentarismo: levantarse cada 30 min</span>
+    </div>
+    <p class="card-sub mt-2">Fuente: Guía RECORD, SEEN (actualización 2021-2022); posicionamiento ADA/EASD sobre actividad física en diabetes.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">🏃 Exercise prescription in T2D <span class="badge">SEEN RECORD Guide · ADA/EASD consensus</span></div>
+    <div class="grid-2">
+      <div>
+        <p style="font-weight:700;color:var(--gold);">Aerobic</p>
+        <p style="font-size:.84rem;color:var(--text-muted);line-height:1.6;">≥150 min/week moderate intensity (or 75 min vigorous), spread over ≥3 days, no more than 2 consecutive days without activity. E.g.: brisk walking, cycling, swimming.</p>
+      </div>
+      <div>
+        <p style="font-weight:700;color:var(--gold);">Strength / resistance</p>
+        <p style="font-size:.84rem;color:var(--text-muted);line-height:1.6;">2-3 sessions/week on non-consecutive days, 8-10 exercises, 1-3 sets of 10-15 reps. Dumbbells, resistance bands, bodyweight.</p>
+      </div>
+    </div>
+    <div class="flex mt-2">
+      <span class="tag tag-accent">🏋️ Combining aerobic + strength training improves insulin sensitivity and can lower HbA1c by ~0.6-0.9%</span>
+      <span class="tag">🪑 Break up sedentary time: stand up every 30 min</span>
+    </div>
+    <p class="card-sub mt-2">Source: SEEN RECORD Guide (2021-2022 update); ADA/EASD position on physical activity in diabetes.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">⚙️ Ajuste de insulina/secretagogos según tipo de ejercicio</div>
+    <div class="algo-step"><span class="step-label">Aeróbico prolongado (&gt;30-45 min)</span>Reducir insulina basal/prandial previa ≥20% según intensidad y duración; objetivo pre-ejercicio 126-180 mg/dl. Suplementar hidratos de carbono si la glucemia es baja o el ejercicio es largo.</div>
+    <div class="algo-step"><span class="step-label">Ejercicio mixto (fútbol, baloncesto, pádel)</span>Efecto variable, puede ser neutro; monitorizar tendencia con MCG si está disponible y ajustar de forma individual.</div>
+    <div class="algo-step"><span class="step-label">Ejercicio explosivo / fuerza / HIIT</span>Puede elevar la glucemia de forma transitoria por respuesta contrarreguladora; no reducir insulina de forma preventiva, monitorizar y corregir a posteriori si procede.</div>
+    <div class="algo-step"><span class="step-label">Con MCG</span>Configurar alarmas de hipoglucemia más altas durante el ejercicio (p. ej. 90-100 mg/dl) y revisar flechas de tendencia antes de iniciar la actividad.</div>
+    <div class="flex mt-2">
+      <span class="tag tag-gold">📌 Iniciar ejercicio con glucemia 90-270 mg/dl (rango ideal 126-180 mg/dl)</span>
+    </div>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">⚙️ Insulin/secretagogue adjustment by exercise type</div>
+    <div class="algo-step"><span class="step-label">Prolonged aerobic (&gt;30-45 min)</span>Reduce prior basal/prandial insulin ≥20% depending on intensity and duration; pre-exercise target 126-180 mg/dl. Supplement carbohydrates if glucose is low or the session is long.</div>
+    <div class="algo-step"><span class="step-label">Mixed exercise (football, basketball, padel)</span>Variable effect, may be neutral; monitor the trend with CGM if available and adjust individually.</div>
+    <div class="algo-step"><span class="step-label">Explosive exercise / strength / HIIT</span>May transiently raise glucose via a counter-regulatory response; don't pre-emptively reduce insulin — monitor and correct afterward if needed.</div>
+    <div class="algo-step"><span class="step-label">With CGM</span>Set higher hypoglycemia alarms during exercise (e.g., 90-100 mg/dl) and check trend arrows before starting the activity.</div>
+    <div class="flex mt-2">
+      <span class="tag tag-gold">📌 Start exercise with glucose 90-270 mg/dl (ideal range 126-180 mg/dl)</span>
+    </div>
+  </div>
+</div>
+  <div class="card">
+    <div class="card-title" data-i18n-es="🧮 Calculadora de ajuste según ejercicio" data-i18n-en="🧮 Exercise-adjustment calculator">🧮 Calculadora de ajuste según ejercicio</div>
+    <p class="card-sub" data-i18n-es="Aplica las reglas de arriba a un caso concreto para orientar la decisión en consulta." data-i18n-en="Applies the rules above to a specific case to guide the in-clinic decision.">Aplica las reglas de arriba a un caso concreto para orientar la decisión en consulta.</p>
+    <div class="grid-2">
+      <div class="field"><label class="flabel" data-i18n-es="Tipo de ejercicio" data-i18n-en="Exercise type">Tipo de ejercicio</label>
+        <select id="exTipo">
+          <option value="aerobico" data-i18n-es="Aeróbico (caminar, bici, natación)" data-i18n-en="Aerobic (walking, cycling, swimming)">Aeróbico (caminar, bici, natación)</option>
+          <option value="mixto" data-i18n-es="Mixto (fútbol, baloncesto, pádel)" data-i18n-en="Mixed (football, basketball, padel)">Mixto (fútbol, baloncesto, pádel)</option>
+          <option value="explosivo" data-i18n-es="Explosivo / fuerza / HIIT" data-i18n-en="Explosive / strength / HIIT">Explosivo / fuerza / HIIT</option>
+        </select>
+      </div>
+      <div class="field"><label class="flabel" data-i18n-es="Duración prevista (min)" data-i18n-en="Planned duration (min)">Duración prevista (min)</label>
+        <input type="number" id="exDuracion" placeholder="ej. 45" data-ph-es="ej. 45" data-ph-en="e.g. 45" min="0">
+      </div>
+      <div class="field"><label class="flabel" data-i18n-es="Intensidad" data-i18n-en="Intensity">Intensidad</label>
+        <select id="exIntensidad">
+          <option value="baja" data-i18n-es="Baja" data-i18n-en="Low">Baja</option>
+          <option value="moderada" selected data-i18n-es="Moderada" data-i18n-en="Moderate">Moderada</option>
+          <option value="alta" data-i18n-es="Alta" data-i18n-en="High">Alta</option>
+        </select>
+      </div>
+      <div class="field"><label class="flabel" data-i18n-es="Glucemia actual (mg/dl)" data-i18n-en="Current glucose (mg/dl)">Glucemia actual (mg/dl)</label>
+        <input type="number" id="exGlucemia" placeholder="ej. 150" data-ph-es="ej. 150" data-ph-en="e.g. 150" min="0">
+      </div>
+    </div>
+    <button class="btn btn-primary btn-sm" id="btnCalcularEjercicio" data-i18n-es="🏃 Calcular ajuste" data-i18n-en="🏃 Calculate adjustment">🏃 Calcular ajuste</button>
+    <div id="exResultado" class="result-box hidden"></div>
+  </div>
+
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">🩺 Precauciones según complicación</div>
+    <div style="font-size:.84rem;color:var(--text);line-height:1.7;">
+      <p><b>Retinopatía proliferativa / edema macular:</b> evitar maniobras de Valsalva, levantamiento de pesos elevados, deportes de contacto o impacto alto. Preferir caminar, natación suave, bicicleta.</p>
+      <p><b>Neuropatía periférica / pie diabético:</b> evitar impacto repetido y ejercicio descalzo; revisar los pies antes y después. Preferir natación, bicicleta estática, ejercicios en sedestación.</p>
+      <p><b>Neuropatía autonómica:</b> riesgo de hipotensión postural e intolerancia térmica; evitar intensidades altas, monitorizar frecuencia cardíaca y tensión arterial. Preferir actividades acuáticas o sentado.</p>
+      <p><b>Nefropatía:</b> evitar deshidratación e intensidades muy altas; ejercicio aeróbico moderado + fuerza controlada, buen control tensional.</p>
+      <p><b>ECV / evento coronario reciente (&lt;6 semanas):</b> valoración cardiológica previa; inicio con bajo impacto y progresión gradual y supervisada.</p>
+    </div>
+    <p class="card-sub mt-2">Fuente: Guía RECORD (recomendaciones para la práctica del deporte en personas con diabetes mellitus), SEEN.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">🩺 Precautions by complication</div>
+    <div style="font-size:.84rem;color:var(--text);line-height:1.7;">
+      <p><b>Proliferative retinopathy / macular edema:</b> avoid Valsalva maneuvers, heavy weightlifting, contact sports, or high-impact activity. Prefer walking, gentle swimming, cycling.</p>
+      <p><b>Peripheral neuropathy / diabetic foot:</b> avoid repeated impact and barefoot exercise; check feet before and after. Prefer swimming, stationary bike, seated exercises.</p>
+      <p><b>Autonomic neuropathy:</b> risk of postural hypotension and heat intolerance; avoid high intensities, monitor heart rate and blood pressure. Prefer water-based or seated activities.</p>
+      <p><b>Nephropathy:</b> avoid dehydration and very high intensities; moderate aerobic exercise + controlled strength training, good blood pressure control.</p>
+      <p><b>CVD / recent coronary event (&lt;6 weeks):</b> prior cardiology assessment; start with low impact and gradual, supervised progression.</p>
+    </div>
+    <p class="card-sub mt-2">Source: RECORD Guide (recommendations for sports practice in people with diabetes mellitus), SEEN.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- ============================================================
+     REFERENCIAS
+     ============================================================ -->
+<section class="panel" id="panel-referencias">
+<div class="lang-block" data-lang="es">
+<div class="card">
+    <div class="card-title">📚 Referencias y fuentes verificables</div>
+    <div class="ref-item"><span class="rnum">1.</span> <b>Algoritmo de tratamiento de la diabetes mellitus tipo 2, redGDPS 2026.</b> Actualización del algoritmo de tratamiento farmacológico centrada en protección cardio-renal-metabólica.<br><a href="https://www.redgdps.org/algoritmo-de-tratamiento-de-la-dm2-de-la-redgdps-2026" target="_blank" rel="noopener">redgdps.org — Algoritmo DM2 2026 →</a></div>
+    <div class="ref-item"><span class="rnum">2.</span> <b>Algoritmo de tratamiento no farmacológico de las personas con DM2, redGDPS 2025.</b> Estilo de vida, dieta y ejercicio como pilar del tratamiento.<br><a href="https://www.redgdps.org/algoritmo-de-tratamiento-no-farmacologico" target="_blank" rel="noopener">redgdps.org — Estilos de vida →</a></div>
+    <div class="ref-item"><span class="rnum">3.</span> <b>Documento de consenso SED-SEEN-SEMERGEN-SEMFyC-SEMG</b> sobre el uso de la monitorización continua de glucosa en personas con DM2 en tratamiento con insulina basal: indicaciones prioritarias, objetivos y criterios de retirada.<br><a href="https://www.sediabetes.org/publicaciones/publicaciones-sed/documento-de-consenso-sed-seen-semergen-semfyc-semg-sobre-el-uso-de-la-monitorizacion-continua-de-glucosa-en-personas-con-diabetes-mellitus-tipo-2-en-tratamiento-con-insulina-basal/" target="_blank" rel="noopener">sediabetes.org — Consenso MCG DM2 →</a></div>
+    <div class="ref-item"><span class="rnum">4.</span> <b>Guía RECORD:</b> recomendaciones clínicas para la práctica del deporte en personas con diabetes mellitus. Grupo de Trabajo de Diabetes Mellitus, SEEN (actualización 2021-2022).<br><a href="https://www.seen.es/informacion-sobre-enfermedades/diabetes/guia-record-diabetes-mellitus-2021" target="_blank" rel="noopener">seen.es — Guía RECORD →</a></div>
+    <div class="ref-item"><span class="rnum">5.</span> <b>Battelino T, et al.</b> Clinical Targets for Continuous Glucose Monitoring Data Interpretation: Recommendations From the International Consensus on Time in Range. <i>Diabetes Care</i> 2019;42(8):1593-1603. Base de los objetivos de TIR/TBR/TAR/CV empleados en este documento.</div>
+    <div class="ref-item"><span class="rnum">6.</span> <b>American Diabetes Association.</b> Standards of Care in Diabetes—2025. <i>Diabetes Care</i> 2025;48(Suppl 1):S1-S321. Referencia internacional de objetivos y algoritmo terapéutico.</div>
+    <div class="ref-item"><span class="rnum">7.</span> <b>Publicaciones SED</b> — Grupo de Trabajo de Tecnologías Aplicadas a la Diabetes: documentos sobre sistemas de MCG.<br><a href="https://www.sediabetes.org/publicaciones/publicaciones-sed/" target="_blank" rel="noopener">sediabetes.org — Publicaciones →</a></div>
+    <div class="ref-item"><span class="rnum">8.</span> <b>Fichas técnicas de fabricante</b> (Abbott FreeStyle Libre, Dexcom) para especificaciones técnicas de cada sensor: duración, frecuencia de lectura, edad mínima aprobada. Consultar siempre la versión vigente en la web del fabricante.</div>
+    <p class="card-sub mt-2" style="border-top:1px solid var(--border);padding-top:10px;">Esta herramienta es de soporte a la decisión clínica y no sustituye el juicio profesional individualizado. Contrastar siempre con el documento original, la ficha técnica vigente y el contexto clínico de cada paciente. La disponibilidad y financiación de fármacos y sistemas de MCG varía según CCAA.</p>
+  </div>
+</div>
+<div class="lang-block" data-lang="en">
+<div class="card">
+    <div class="card-title">📚 References and verifiable sources</div>
+    <div class="ref-item"><span class="rnum">1.</span> <b>Type 2 diabetes treatment algorithm, redGDPS 2026.</b> Update to the pharmacological treatment algorithm focused on cardio-renal-metabolic protection.<br><a href="https://www.redgdps.org/algoritmo-de-tratamiento-de-la-dm2-de-la-redgdps-2026" target="_blank" rel="noopener">redgdps.org — T2D Algorithm 2026 →</a></div>
+    <div class="ref-item"><span class="rnum">2.</span> <b>Non-pharmacological treatment algorithm for people with T2D, redGDPS 2025.</b> Lifestyle, diet, and exercise as a treatment pillar.<br><a href="https://www.redgdps.org/algoritmo-de-tratamiento-no-farmacologico" target="_blank" rel="noopener">redgdps.org — Lifestyle →</a></div>
+    <div class="ref-item"><span class="rnum">3.</span> <b>SED-SEEN-SEMERGEN-SEMFyC-SEMG consensus document</b> on the use of continuous glucose monitoring in people with T2D on basal insulin therapy: priority indications, targets, and discontinuation criteria.<br><a href="https://www.sediabetes.org/publicaciones/publicaciones-sed/documento-de-consenso-sed-seen-semergen-semfyc-semg-sobre-el-uso-de-la-monitorizacion-continua-de-glucosa-en-personas-con-diabetes-mellitus-tipo-2-en-tratamiento-con-insulina-basal/" target="_blank" rel="noopener">sediabetes.org — CGM in T2D Consensus →</a></div>
+    <div class="ref-item"><span class="rnum">4.</span> <b>RECORD Guide:</b> clinical recommendations for sports practice in people with diabetes mellitus. Diabetes Mellitus Working Group, SEEN (2021-2022 update).<br><a href="https://www.seen.es/informacion-sobre-enfermedades/diabetes/guia-record-diabetes-mellitus-2021" target="_blank" rel="noopener">seen.es — RECORD Guide →</a></div>
+    <div class="ref-item"><span class="rnum">5.</span> <b>Battelino T, et al.</b> Clinical Targets for Continuous Glucose Monitoring Data Interpretation: Recommendations From the International Consensus on Time in Range. <i>Diabetes Care</i> 2019;42(8):1593-1603. Basis for the TIR/TBR/TAR/CV targets used in this document.</div>
+    <div class="ref-item"><span class="rnum">6.</span> <b>American Diabetes Association.</b> Standards of Care in Diabetes—2025. <i>Diabetes Care</i> 2025;48(Suppl 1):S1-S321. International reference for targets and treatment algorithm.</div>
+    <div class="ref-item"><span class="rnum">7.</span> <b>SED Publications</b> — Diabetes Technology Working Group: documents on CGM systems.<br><a href="https://www.sediabetes.org/publicaciones/publicaciones-sed/" target="_blank" rel="noopener">sediabetes.org — Publications →</a></div>
+    <div class="ref-item"><span class="rnum">8.</span> <b>Manufacturer prescribing information</b> (Abbott FreeStyle Libre, Dexcom) for each sensor's technical specifications: duration, reading frequency, approved minimum age. Always check the current version on the manufacturer's website.</div>
+    <p class="card-sub mt-2" style="border-top:1px solid var(--border);padding-top:10px;">This tool is a clinical decision support aid and does not replace individualized professional judgment. Always cross-check against the original document, current prescribing information, and each patient's clinical context. Availability and reimbursement of drugs and CGM systems vary by region/country — the funding and coverage details in this app reflect the Spanish National Health System (SNS) and its autonomous regions (CCAA).</p>
+  </div>
+</div>
+
+</section>
+
+
+</div>
+<script>
+(function () {
+  "use strict";
+
+  // ============================================================
+  // LANGUAGE ENGINE
+  // ============================================================
+  var LANG = 'es';
+
+  function applyLanguage(lang) {
+    LANG = lang;
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    try { localStorage.setItem('diabesity4_lang', lang); } catch (e) {}
+
+    var els = document.querySelectorAll('[data-i18n-es]');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      var v = lang === 'en' ? el.getAttribute('data-i18n-en') : el.getAttribute('data-i18n-es');
+      if (v !== null) el.textContent = v;
+    }
+    var phs = document.querySelectorAll('[data-ph-es]');
+    for (var j = 0; j < phs.length; j++) {
+      var p = phs[j];
+      var pv = lang === 'en' ? p.getAttribute('data-ph-en') : p.getAttribute('data-ph-es');
+      if (pv !== null) p.setAttribute('placeholder', pv);
+    }
+    var lbl = document.getElementById('langToggleLabel');
+    if (lbl) lbl.textContent = lang === 'es' ? 'EN' : 'ES';
+
+    // Clear stale dynamic results generated in the previous language
+    var staleIds = ['resultadoTrat', 'wizResultado', 'agpResultado', 'exResultado', 'insBasalResultado', 'insCorreccionResultado'];
+    for (var k = 0; k < staleIds.length; k++) {
+      var elx = document.getElementById(staleIds[k]);
+      if (elx) { elx.classList.add('hidden'); elx.innerHTML = ''; }
+    }
+    if (typeof wizReset === 'function') wizReset();
+  }
+
+  function bindLangToggle() {
+    var btn = document.getElementById('btnLangToggle');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        applyLanguage(LANG === 'es' ? 'en' : 'es');
+      });
+    }
+    var saved = null;
+    try { saved = localStorage.getItem('diabesity4_lang'); } catch (e) {}
+    applyLanguage(saved === 'en' ? 'en' : 'es');
+  }
+
+  // ============================================================
+  // THEME (dark/light)
+  // ============================================================
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('diabesity4_theme', theme); } catch (e) {}
+    var icon = document.getElementById('themeToggleIcon');
+    if (icon) icon.textContent = theme === 'light' ? '☀️' : '🌙';
+  }
+
+  function bindThemeToggle() {
+    var btn = document.getElementById('btnThemeToggle');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var current = document.documentElement.getAttribute('data-theme') || 'dark';
+        applyTheme(current === 'light' ? 'dark' : 'light');
+      });
+    }
+    var saved = null;
+    try { saved = localStorage.getItem('diabesity4_theme'); } catch (e) {}
+    if (!saved) {
+      try {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) saved = 'light';
+      } catch (e2) {}
+    }
+    applyTheme(saved === 'light' ? 'light' : 'dark');
+  }
+
+  // ============================================================
+  // TABS
+  // ============================================================
+  function switchTab(tabId) {
+    var btns = document.querySelectorAll('.tab-btn');
+    for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
+    var btn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+    if (btn) btn.classList.add('active');
+    var panels = document.querySelectorAll('.panel');
+    for (var j = 0; j < panels.length; j++) { panels[j].classList.remove('active'); }
+    var panel = document.getElementById('panel-' + tabId);
+    if (panel) panel.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function bindTabs() {
+    var btns = document.querySelectorAll('.tab-btn');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () { switchTab(this.getAttribute('data-tab')); });
+    }
+    var gotos = document.querySelectorAll('[data-goto]');
+    for (var k = 0; k < gotos.length; k++) {
+      gotos[k].addEventListener('click', function () { switchTab(this.getAttribute('data-goto')); });
+    }
+  }
+
+  // ============================================================
+  // PWA INSTALL
+  // ============================================================
+  var deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    var banner = document.getElementById('install-banner');
+    if (banner) banner.classList.add('show');
+  });
+  function bindInstall() {
+    var btn = document.getElementById('btn-install');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function () {
+        deferredPrompt = null;
+        var banner = document.getElementById('install-banner');
+        if (banner) banner.classList.remove('show');
+      });
+    });
+  }
+
+  // ============================================================
+  // TRATAMIENTO — ayuda a la decisión por comorbilidad
+  // ============================================================
+  var TRAT = {
+    es: {
+      ecv: '<strong>ECV establecida / RCV alto-muy alto:</strong> priorizar iSGLT2 o arGLP-1 (indistintamente o combinados). Preferir iSGLT2 si IMC &lt;30. Intensificar con iDPP4, pioglitazona, repaglinida o insulina basal según necesidad. Evitar la mayoría de sulfonilureas.',
+      ic: '<strong>Insuficiencia cardíaca:</strong> combinación recomendada metformina + iSGLT2 (beneficio independiente de la fracción de eyección). Alternativa arGLP-1 o iDPP4 (excepto saxagliptina). Insulina basal (glargina/degludec) si se precisa. Evitar pioglitazona.',
+      erc: '<strong>Enfermedad renal crónica:</strong> iSGLT2 (empagliflozina/dapagliflozina/canagliflozina) como preferente si FG lo permite. Alternativa arGLP-1 (semaglutida). Intensificar con iDPP4 (ajustar dosis si FG &lt;50, excepto linagliptina), pioglitazona, repaglinida o insulina basal.',
+      obesidad: '<strong>Obesidad (IMC ≥30):</strong> priorizar arGLP-1 (semaglutida, dulaglutida) o tirzepatida (GIP/GLP-1). Valorar también iSGLT2. Objetivo de pérdida ponderal 5-10%. Considerar cirugía metabólica si IMC &gt;35 y ausencia de control.',
+      hepatopatia: '<strong>Enfermedad hepática metabólica (MASLD/MASH):</strong> nuevo condicionante en el algoritmo 2026. Priorizar arGLP-1 (beneficio sobre esteatosis e inflamación hepática) y/o pioglitazona en pacientes seleccionados; iSGLT2 como alternativa. Evitar fármacos con potencial hepatotóxico no evaluado.',
+      fragil: '<strong>Paciente frágil:</strong> objetivos de HbA1c más laxos (7,5-8,5% según grado). Priorizar seguridad y evitar hipoglucemias. iSGLT2 útil si coexiste IC/ERC. Evitar sulfonilureas; ajustar o suspender fármacos de riesgo. Individualizar de forma estricta.',
+      ninguna: '<strong>Sin condicionante predominante:</strong> intervención en estilo de vida + metformina como base habitual. Añadir iSGLT2 o arGLP-1 según preferencia, comorbilidad emergente o disponibilidad. Intensificar según evolución de la HbA1c evitando la inercia clínica.'
+    },
+    en: {
+      ecv: '<strong>Established CVD / very high CV risk:</strong> prioritize SGLT2i or GLP-1 RA (either or combined). Prefer SGLT2i if BMI &lt;30. Intensify with DPP-4i, pioglitazone, repaglinide, or basal insulin as needed. Avoid most sulfonylureas.',
+      ic: '<strong>Heart failure:</strong> recommended combination is metformin + SGLT2i (benefit independent of ejection fraction). Alternative: GLP-1 RA or DPP-4i (except saxagliptin). Basal insulin (glargine/degludec) if needed. Avoid pioglitazone.',
+      erc: '<strong>Chronic kidney disease:</strong> SGLT2i (empagliflozin/dapagliflozin/canagliflozin) preferred if eGFR allows. Alternative: GLP-1 RA (semaglutide). Intensify with DPP-4i (adjust dose if eGFR &lt;50, except linagliptin), pioglitazone, repaglinide, or basal insulin.',
+      obesidad: '<strong>Obesity (BMI ≥30):</strong> prioritize GLP-1 RA (semaglutide, dulaglutide) or tirzepatide (GIP/GLP-1). Also consider SGLT2i. Weight-loss goal 5-10%. Consider metabolic surgery if BMI &gt;35 with uncontrolled disease.',
+      hepatopatia: '<strong>Metabolic liver disease (MASLD/MASH):</strong> new driver in the 2026 algorithm. Prioritize GLP-1 RA (benefit on steatosis and liver inflammation) and/or pioglitazone in selected patients; SGLT2i as an alternative. Avoid drugs with unevaluated hepatotoxic potential.',
+      fragil: '<strong>Frail patient:</strong> looser HbA1c targets (7.5-8.5% depending on degree). Prioritize safety and avoid hypoglycemia. SGLT2i useful if HF/CKD coexist. Avoid sulfonylureas; adjust or discontinue high-risk drugs. Individualize strictly.',
+      ninguna: '<strong>No predominant driver:</strong> lifestyle intervention + metformin as the usual base. Add SGLT2i or GLP-1 RA depending on preference, emerging comorbidity, or availability. Intensify as HbA1c evolves, avoiding clinical inertia.'
+    }
+  };
+
+  function bindTratamiento() {
+    var sel = document.getElementById('selComorbilidad');
+    if (!sel) return;
+    sel.addEventListener('change', function () {
+      var out = document.getElementById('resultadoTrat');
+      var v = sel.value;
+      if (!v) { out.classList.add('hidden'); return; }
+      out.classList.remove('hidden');
+      var srcNote = LANG === 'en' ? 'Source: T2D treatment algorithm, redGDPS 2026.' : 'Fuente: Algoritmo de tratamiento de la DM2, redGDPS 2026.';
+      out.innerHTML = (TRAT[LANG][v] || '') + '<p style="margin-top:10px;font-size:.72rem;color:var(--text-muted);">' + srcNote + '</p>';
+    });
+  }
+
+  // ============================================================
+  // TRATAMIENTO — calculadora de dosis de insulina (referencia)
+  // ============================================================
+  function calcularBasalInicio() {
+    var out = document.getElementById('insBasalResultado');
+    if (!out) return;
+    var peso = parseFloat(val('insPeso'));
+    if (isNaN(peso) || peso <= 0) {
+      out.classList.remove('hidden');
+      out.innerHTML = LANG === 'en' ? '<p>Enter a valid weight.</p>' : '<p>Introduce un peso válido.</p>';
+      return;
+    }
+    var min = Math.round(peso * 0.1);
+    var max = Math.round(peso * 0.2);
+    out.classList.remove('hidden');
+    if (LANG === 'en') {
+      out.innerHTML =
+        '<p><strong>Reference starting dose: ' + min + '-' + max + ' U/day</strong> (0.1-0.2 U/kg/day), or 10 U/day as a fixed starting point for a simpler regimen.</p>' +
+        '<p style="margin-top:6px;font-size:.72rem;color:var(--text-muted);">Titrate +2-4 U every 2-3 days based on fasting glucose until reaching the individualized target. Reduce if hypoglycemia occurs.</p>';
+      return;
+    }
+    out.innerHTML =
+      '<p><strong>Dosis de inicio orientativa: ' + min + '-' + max + ' U/día</strong> (0,1-0,2 U/kg/día), o 10 U/día como punto de partida fijo si se prefiere una pauta simple.</p>' +
+      '<p style="margin-top:6px;font-size:.72rem;color:var(--text-muted);">Titular +2-4 U cada 2-3 días según glucemia en ayunas hasta objetivo individualizado. Reducir si hipoglucemia.</p>';
+  }
+
+  function calcularDosisCorreccion() {
+    var out = document.getElementById('insCorreccionResultado');
+    if (!out) return;
+    var dtd = parseFloat(val('insDTD'));
+    var regla = parseFloat(val('insTipoCorreccion'));
+    var actual = parseFloat(val('insGlucemiaActual'));
+    var objetivo = parseFloat(val('insGlucemiaObjetivo'));
+
+    if (isNaN(dtd) || dtd <= 0 || isNaN(actual) || isNaN(objetivo)) {
+      out.classList.remove('hidden');
+      out.innerHTML = LANG === 'en' ? '<p>Enter total daily dose, current glucose, and target.</p>' : '<p>Introduce dosis total diaria, glucemia actual y objetivo.</p>';
+      return;
+    }
+    var fsi = regla / dtd;
+    var dosis = (actual - objetivo) / fsi;
+
+    out.classList.remove('hidden');
+    if (LANG === 'en') {
+      if (actual <= objetivo) {
+        out.innerHTML = '<p>Current glucose (' + actual + ' mg/dl) is already at or below target (' + objetivo + ' mg/dl): <strong>no additional correction dose is calculated.</strong></p>';
+        return;
+      }
+      if (dosis > 15) {
+        out.innerHTML =
+          '<p><strong>ISF = ' + fsi.toFixed(1) + ' mg/dl/U</strong> · Calculated dose: ' + dosis.toFixed(1) + ' U.</p>' +
+          '<div class="alert-box red">🚨 Calculated dose is high (&gt;15 U). Double-check the inputs and consider specialist supervision before administering; do not apply this result automatically.</div>';
+      } else {
+        out.innerHTML =
+          '<p><strong>Insulin Sensitivity Factor (ISF) = ' + regla + ' ÷ ' + dtd + ' = ' + fsi.toFixed(1) + ' mg/dl per unit</strong></p>' +
+          '<p style="margin-top:4px;">Correction dose = (' + actual + ' − ' + objetivo + ') ÷ ' + fsi.toFixed(1) + ' = <strong>' + dosis.toFixed(1) + ' U</strong> (round according to the available pen/syringe).</p>' +
+          '<p style="margin-top:6px;font-size:.72rem;color:var(--text-muted);">Reference result only. Verify clinically before administering; do not use in ketoacidosis, in T1D without specialist supervision, or in minors.</p>';
+      }
+      return;
+    }
+    if (actual <= objetivo) {
+      out.innerHTML = '<p>Glucemia actual (' + actual + ' mg/dl) ya está en o por debajo del objetivo (' + objetivo + ' mg/dl): <strong>no se calcula dosis de corrección adicional.</strong></p>';
+      return;
+    }
+    if (dosis > 15) {
+      out.innerHTML =
+        '<p><strong>FSI = ' + fsi.toFixed(1) + ' mg/dl/U</strong> · Dosis calculada: ' + dosis.toFixed(1) + ' U.</p>' +
+        '<div class="alert-box red">🚨 Dosis calculada elevada (&gt;15 U). Revisar los datos introducidos y valorar supervisión especializada antes de administrar; no aplicar el resultado de forma automática.</div>';
+    } else {
+      out.innerHTML =
+        '<p><strong>Factor de sensibilidad (FSI) = ' + regla + ' ÷ ' + dtd + ' = ' + fsi.toFixed(1) + ' mg/dl por unidad</strong></p>' +
+        '<p style="margin-top:4px;">Dosis de corrección = (' + actual + ' − ' + objetivo + ') ÷ ' + fsi.toFixed(1) + ' = <strong>' + dosis.toFixed(1) + ' U</strong> (redondear según la pluma/jeringa disponible).</p>' +
+        '<p style="margin-top:6px;font-size:.72rem;color:var(--text-muted);">Resultado de referencia. Verificar clínicamente antes de administrar; no usar en cetoacidosis, DM1 sin supervisión especializada, ni en menores.</p>';
+    }
+  }
+
+  function bindCalculadoraInsulina() {
+    var btnBasal = document.getElementById('btnCalcularBasal');
+    if (btnBasal) btnBasal.addEventListener('click', calcularBasalInicio);
+    var btnCorr = document.getElementById('btnCalcularCorreccion');
+    if (btnCorr) btnCorr.addEventListener('click', calcularDosisCorreccion);
+  }
+
+  // ============================================================
+  // MCG — interpretador interactivo de métricas AGP
+  // ============================================================
+  function interpretarAGP() {
+    var out = document.getElementById('agpResultado');
+    if (!out) return;
+    var uso = parseFloat(val('agpUso'));
+    var tir = parseFloat(val('agpTir'));
+    var cv = parseFloat(val('agpCv'));
+    var tbr70 = parseFloat(val('agpTbr70'));
+    var tbr54 = parseFloat(val('agpTbr54'));
+    var tar250 = parseFloat(val('agpTar250'));
+    var gmi = parseFloat(val('agpGmi'));
+    var hba1cLab = parseFloat(val('agpHba1cLab'));
+
+    var lines = [];
+    var alerts = [];
+
+    if (isNaN(uso) && isNaN(tir) && isNaN(cv) && isNaN(tbr70) && isNaN(tbr54) && isNaN(tar250) && isNaN(gmi)) {
+      out.classList.remove('hidden');
+      out.innerHTML = LANG === 'en' ? '<p>Enter at least one AGP report metric to interpret.</p>' : '<p>Introduce al menos una métrica del informe AGP para interpretar.</p>';
+      return;
+    }
+
+    if (LANG === 'en') {
+      if (!isNaN(tir) && tir < 70) {
+        alerts.push('<div class="alert-box red">🚨 <strong>TIR ' + tir + '% below target (&gt;70%).</strong> Consider treatment intensification if there is no associated hypoglycemia.</div>');
+      }
+      if (!isNaN(tbr54) && tbr54 >= 1) {
+        alerts.push('<div class="alert-box red">🚨 <strong>Recurrent clinically significant hypoglycemia</strong> (TBR &lt;54 = ' + tbr54 + '%, limit &lt;1%). <strong>Urgent review</strong> and reduction of insulin/secretagogues is recommended.</div>');
+      }
+      if (!isNaN(gmi) && !isNaN(hba1cLab) && Math.abs(gmi - hba1cLab) >= 0.5) {
+        alerts.push('<div class="alert-box amber">⚠️ <strong>GMI (' + gmi + '%) differs notably from the lab HbA1c on file (' + hba1cLab + '%).</strong> Consider causes: anemia, hemoglobinopathy, CKD, pregnancy, high glycemic variability, or a short/unrepresentative recording period.</div>');
+      }
+      if (!isNaN(uso)) {
+        if (uso < 70) lines.push('⚠️ <strong>Insufficient data quality</strong> (sensor active ' + uso + '%, target &gt;70%): this report is not reliable for treatment decisions; reinforce education/adherence before adjusting treatment.');
+        else lines.push('✅ Adequate data quality (sensor active ' + uso + '%).');
+      }
+      if (!isNaN(tir)) {
+        if (tir >= 70) lines.push('✅ Time in Range (TIR) ' + tir + '%: within target (&gt;70%).');
+        else if (tir >= 50) lines.push('🟡 TIR ' + tir + '%: below the standard target (&gt;70%), though acceptable if the patient is frail or at high hypoglycemia risk (target &gt;50% in that profile).');
+        else lines.push('🔴 TIR ' + tir + '%: clearly below target. Consider intensifying treatment if there is no significant associated hypoglycemia.');
+      }
+      if (!isNaN(tbr70)) {
+        if (tbr70 >= 4) lines.push('🔴 TBR &lt;70 ' + tbr70 + '%: above the limit (&lt;4%). Review insulin/secretagogue dosing and timing before intensifying other drugs.');
+        else lines.push('✅ TBR &lt;70 ' + tbr70 + '%: within target (&lt;4%).');
+      }
+      if (!isNaN(tbr54)) {
+        if (tbr54 >= 1) lines.push('🔴 TBR &lt;54 ' + tbr54 + '%: clinically significant hypoglycemia above the limit (&lt;1%). Safety priority: reduce insulin/secretagogues.');
+        else lines.push('✅ TBR &lt;54 ' + tbr54 + '%: within target (&lt;1%).');
+      }
+      if (!isNaN(tar250)) {
+        if (tar250 >= 5) lines.push('🟠 TAR &gt;250 ' + tar250 + '%: above the limit (&lt;5%). Suggests marked hyperglycemia; review prandial or basal regimen.');
+        else lines.push('✅ TAR &gt;250 ' + tar250 + '%: within target (&lt;5%).');
+      }
+      if (!isNaN(cv)) {
+        if (cv > 36) lines.push('🟡 Variability (CV) ' + cv + '%: above target (≤36%). Review the regularity of meal/exercise/medication timing and rule out unnoticed hypoglycemia before intensifying.');
+        else lines.push('✅ Variability (CV) ' + cv + '%: within target (≤36%).');
+      }
+      if (!isNaN(gmi)) {
+        var gmiLine = '📊 GMI (Glucose Management Indicator) ' + gmi + '%: estimated HbA1c from the sensor\'s average glucose (not a direct measurement).';
+        if (!isNaN(hba1cLab)) {
+          if (Math.abs(gmi - hba1cLab) >= 0.5) {
+            gmiLine += ' Differs from the lab HbA1c on file (' + hba1cLab + '%) by ' + Math.abs(gmi - hba1cLab).toFixed(1) + ' points — see alert above.';
+          } else {
+            gmiLine += ' Consistent with the lab HbA1c on file (' + hba1cLab + '%).';
+          }
+        } else {
+          gmiLine += ' No lab HbA1c entered above to compare against.';
+        }
+        lines.push(gmiLine);
+      }
+      lines.push('<span style="font-size:.72rem;color:var(--text-muted);">Automatic interpretation based on the criteria in the "AGP interpretation in 6 steps" section (international Time in Range consensus, Battelino 2019). Does not replace overall clinical judgment.</span>');
+      out.classList.remove('hidden');
+      out.innerHTML = alerts.join('') + lines.map(function (l) { return '<p style="margin-bottom:7px;">' + l + '</p>'; }).join('');
+      return;
+    }
+
+    if (!isNaN(tir) && tir < 70) {
+      alerts.push('<div class="alert-box red">🚨 <strong>TIR ' + tir + '% por debajo de objetivo (&gt;70%).</strong> Considerar intensificación terapéutica si no hay hipoglucemias asociadas.</div>');
+    }
+    if (!isNaN(tbr54) && tbr54 >= 1) {
+      alerts.push('<div class="alert-box red">🚨 <strong>Hipoglucemia clínicamente significativa recurrente</strong> (TBR &lt;54 = ' + tbr54 + '%, límite &lt;1%). Se recomienda <strong>revisión urgente</strong> y reducción de insulina/secretagogos.</div>');
+    }
+    if (!isNaN(gmi) && !isNaN(hba1cLab) && Math.abs(gmi - hba1cLab) >= 0.5) {
+      alerts.push('<div class="alert-box amber">⚠️ <strong>El GMI (' + gmi + '%) difiere notablemente de la HbA1c de laboratorio registrada (' + hba1cLab + '%).</strong> Valorar causas: anemia, hemoglobinopatía, ERC, embarazo, alta variabilidad glucémica, o un periodo de registro corto/poco representativo.</div>');
+    }
+
+    if (!isNaN(uso)) {
+      if (uso < 70) lines.push('⚠️ <strong>Calidad de datos insuficiente</strong> (uso del sensor ' + uso + '%, objetivo &gt;70%): este informe no es fiable para tomar decisiones terapéuticas; reforzar educación/adherencia antes de ajustar tratamiento.');
+      else lines.push('✅ Calidad de datos adecuada (uso del sensor ' + uso + '%).');
+    }
+    if (!isNaN(tir)) {
+      if (tir >= 70) lines.push('✅ Tiempo en Rango (TIR) ' + tir + '%: dentro de objetivo (&gt;70%).');
+      else if (tir >= 50) lines.push('🟡 TIR ' + tir + '%: por debajo del objetivo estándar (&gt;70%), aunque aceptable si el paciente es frágil o de alto riesgo de hipoglucemia (objetivo &gt;50% en ese perfil).');
+      else lines.push('🔴 TIR ' + tir + '%: claramente por debajo de objetivo. Valorar intensificar tratamiento si no hay hipoglucemias significativas asociadas.');
+    }
+    if (!isNaN(tbr70)) {
+      if (tbr70 >= 4) lines.push('🔴 TBR &lt;70 ' + tbr70 + '%: por encima del límite (&lt;4%). Revisar dosis de insulina/secretagogos y horarios antes de intensificar otros fármacos.');
+      else lines.push('✅ TBR &lt;70 ' + tbr70 + '%: dentro de objetivo (&lt;4%).');
+    }
+    if (!isNaN(tbr54)) {
+      if (tbr54 >= 1) lines.push('🔴 TBR &lt;54 ' + tbr54 + '%: hipoglucemia clínicamente significativa por encima del límite (&lt;1%). Prioridad de seguridad: reducir insulina/secretagogos.');
+      else lines.push('✅ TBR &lt;54 ' + tbr54 + '%: dentro de objetivo (&lt;1%).');
+    }
+    if (!isNaN(tar250)) {
+      if (tar250 >= 5) lines.push('🟠 TAR &gt;250 ' + tar250 + '%: por encima del límite (&lt;5%). Sugiere hiperglucemias marcadas; revisar pauta prandial o basal.');
+      else lines.push('✅ TAR &gt;250 ' + tar250 + '%: dentro de objetivo (&lt;5%).');
+    }
+    if (!isNaN(cv)) {
+      if (cv > 36) lines.push('🟡 Variabilidad (CV) ' + cv + '%: por encima de objetivo (≤36%). Revisar regularidad de horarios de comida/ejercicio/medicación y descartar hipoglucemias no percibidas antes de intensificar.');
+      else lines.push('✅ Variabilidad (CV) ' + cv + '%: dentro de objetivo (≤36%).');
+    }
+    if (!isNaN(gmi)) {
+      var gmiLineEs = '📊 GMI (Indicador de Manejo de Glucosa) ' + gmi + '%: estimación de la HbA1c a partir de la glucosa media del sensor (no es una medición directa).';
+      if (!isNaN(hba1cLab)) {
+        if (Math.abs(gmi - hba1cLab) >= 0.5) {
+          gmiLineEs += ' Difiere de la HbA1c de laboratorio registrada (' + hba1cLab + '%) en ' + Math.abs(gmi - hba1cLab).toFixed(1) + ' puntos — ver alerta arriba.';
+        } else {
+          gmiLineEs += ' Concordante con la HbA1c de laboratorio registrada (' + hba1cLab + '%).';
+        }
+      } else {
+        gmiLineEs += ' No se ha introducido una HbA1c de laboratorio arriba para comparar.';
+      }
+      lines.push(gmiLineEs);
+    }
+
+    lines.push('<span style="font-size:.72rem;color:var(--text-muted);">Interpretación automática basada en los criterios de la sección "Interpretación del AGP en 6 pasos" (consenso internacional de Tiempo en Rango, Battelino 2019). No sustituye la valoración clínica global.</span>');
+
+    out.classList.remove('hidden');
+    out.innerHTML = alerts.join('') + lines.map(function (l) { return '<p style="margin-bottom:7px;">' + l + '</p>'; }).join('');
+  }
+
+  function bindMCG() {
+    var btn = document.getElementById('btnInterpretarAGP');
+    if (btn) btn.addEventListener('click', interpretarAGP);
+  }
+
+  // ============================================================
+  // EJERCICIO — calculadora interactiva de ajuste
+  // ============================================================
+  function calcularAjusteEjercicio() {
+    var out = document.getElementById('exResultado');
+    if (!out) return;
+    var tipo = val('exTipo');
+    var duracion = parseFloat(val('exDuracion'));
+    var intensidad = val('exIntensidad');
+    var glucemia = parseFloat(val('exGlucemia'));
+    var lines = [];
+
+    if (LANG === 'en') {
+      if (!isNaN(glucemia)) {
+        if (glucemia < 90) {
+          lines.push('🔴 Glucose ' + glucemia + ' mg/dl: <strong>below the safe range to start</strong> (90-270 mg/dl). Take fast-acting carbohydrates and reassess before starting.');
+        } else if (glucemia > 270) {
+          lines.push('🟠 Glucose ' + glucemia + ' mg/dl: <strong>above the safe range</strong>. Check ketones if applicable, hydrate, and postpone high-intensity exercise until corrected.');
+        } else if (glucemia >= 126 && glucemia <= 180) {
+          lines.push('✅ Glucose ' + glucemia + ' mg/dl: within the ideal range (126-180 mg/dl) to start.');
+        } else {
+          lines.push('🟡 Glucose ' + glucemia + ' mg/dl: within the acceptable range (90-270 mg/dl) though outside the ideal one (126-180 mg/dl); may start with caution.');
+        }
+      }
+      if (tipo === 'aerobico') {
+        if (!isNaN(duracion) && duracion >= 30) {
+          lines.push('Prolonged aerobic (' + duracion + ' min): reduce prior basal/prandial insulin ≥20% depending on intensity (' + intensidad + '); supplement carbohydrates if planned duration is &lt;1h or starting glucose is on the tighter side.');
+        } else {
+          lines.push('Short-duration aerobic: insulin adjustment generally unnecessary unless high intensity or a prior history of hypoglycemia with similar exercise.');
+        }
+      } else if (tipo === 'mixto') {
+        lines.push('Mixed exercise: variable effect on glucose, may be neutral. Monitor the trend with CGM if available and adjust individually, without systematically reducing insulin beforehand.');
+      } else if (tipo === 'explosivo') {
+        lines.push('Explosive/strength/HIIT exercise: may transiently raise glucose via a counter-regulatory response. Do not pre-emptively reduce insulin; correct afterward if needed.');
+      }
+      if (intensidad === 'alta') {
+        lines.push('High intensity: higher risk of delayed hypoglycemia (hours later, even overnight) — consider checking glucose before bed after the session.');
+      }
+      lines.push('<span style="font-size:.72rem;color:var(--text-muted);">Reference guidance based on the SEEN RECORD Guide and the ADA/EASD consensus on exercise and CGM. Always individualize based on the patient\'s prior response.</span>');
+      out.classList.remove('hidden');
+      out.innerHTML = lines.map(function (l) { return '<p style="margin-bottom:7px;">' + l + '</p>'; }).join('');
+      return;
+    }
+
+    if (!isNaN(glucemia)) {
+      if (glucemia < 90) {
+        lines.push('🔴 Glucemia ' + glucemia + ' mg/dl: <strong>por debajo del rango seguro para iniciar</strong> (90-270 mg/dl). Tomar hidratos de carbono de absorción rápida y reevaluar antes de empezar.');
+      } else if (glucemia > 270) {
+        lines.push('🟠 Glucemia ' + glucemia + ' mg/dl: <strong>por encima del rango seguro</strong>. Valorar cetonas si procede, hidratar y posponer ejercicio de intensidad alta hasta corregir.');
+      } else if (glucemia >= 126 && glucemia <= 180) {
+        lines.push('✅ Glucemia ' + glucemia + ' mg/dl: dentro del rango ideal (126-180 mg/dl) para iniciar.');
+      } else {
+        lines.push('🟡 Glucemia ' + glucemia + ' mg/dl: dentro del rango aceptable (90-270 mg/dl) aunque fuera del ideal (126-180 mg/dl); puede iniciar con precaución.');
+      }
+    }
+
+    if (tipo === 'aerobico') {
+      if (!isNaN(duracion) && duracion >= 30) {
+        lines.push('Aeróbico prolongado (' + duracion + ' min): reducir insulina basal/prandial previa ≥20% según intensidad (' + intensidad + '); suplementar hidratos de carbono si la duración prevista es &lt;1h o la glucemia de inicio es ajustada.');
+      } else {
+        lines.push('Aeróbico de corta duración: ajuste de insulina generalmente innecesario salvo intensidad alta o antecedente de hipoglucemia con ejercicio similar.');
+      }
+    } else if (tipo === 'mixto') {
+      lines.push('Ejercicio mixto: efecto variable sobre la glucemia, puede ser neutro. Monitorizar tendencia con MCG si está disponible y ajustar de forma individual, sin reducir insulina de forma preventiva por sistema.');
+    } else if (tipo === 'explosivo') {
+      lines.push('Ejercicio explosivo/fuerza/HIIT: puede elevar la glucemia de forma transitoria por respuesta contrarreguladora. No reducir insulina de forma preventiva; corregir a posteriori si procede.');
+    }
+
+    if (intensidad === 'alta') {
+      lines.push('Intensidad alta: mayor riesgo de hipoglucemia tardía (horas después, incluso nocturna) — considerar revisar glucemia antes de dormir tras la sesión.');
+    }
+
+    lines.push('<span style="font-size:.72rem;color:var(--text-muted);">Orientativo, basado en la Guía RECORD SEEN y el consenso ADA/EASD sobre ejercicio y CGM. Individualizar siempre según respuesta previa del paciente.</span>');
+
+    out.classList.remove('hidden');
+    out.innerHTML = lines.map(function (l) { return '<p style="margin-bottom:7px;">' + l + '</p>'; }).join('');
+  }
+
+  function bindEjercicio() {
+    var btn = document.getElementById('btnCalcularEjercicio');
+    if (btn) btn.addEventListener('click', calcularAjusteEjercicio);
+  }
+
+  // ============================================================
+  // TRATAMIENTO — flujo guiado de 3 preguntas
+  // ============================================================
+  var wizAnswers = { cond: null, hba1c: null, insulina: null };
+
+  function wizGoToStep(n) {
+    for (var i = 1; i <= 3; i++) {
+      var step = document.getElementById('wizStep' + i);
+      if (step) step.style.display = (i === n) ? '' : 'none';
+    }
+    var dots = document.querySelectorAll('.wiz-dot');
+    for (var j = 0; j < dots.length; j++) {
+      var dn = parseInt(dots[j].getAttribute('data-dot'), 10);
+      dots[j].classList.remove('active', 'done');
+      if (dn < n) dots[j].classList.add('done');
+      else if (dn === n) dots[j].classList.add('active');
+    }
+  }
+
+  function wizCompute() {
+    var cond = wizAnswers.cond;
+    var hba1cAlta = wizAnswers.hba1c === 'si';
+    var enInsulina = wizAnswers.insulina === 'si';
+    var out = document.getElementById('wizResultado');
+    if (!out) return;
+
+    var pasos = [];
+    pasos.push((TRAT[LANG][cond] || TRAT[LANG].ninguna));
+
+    if (LANG === 'en') {
+      if (hba1cAlta && !enInsulina) {
+        pasos.push('HbA1c &gt;8.5% and not yet on insulin: consider starting with a <strong>dual combination</strong> from the outset (e.g., metformin + SGLT2i/GLP-1 RA depending on the driver) instead of monotherapy, to reach target faster and avoid clinical inertia.');
+      } else if (hba1cAlta && enInsulina) {
+        pasos.push('HbA1c &gt;8.5% already on insulin: check whether a drug with cardiorenal benefit is already in place for the driver; if not controlled, consider intensifying the regimen (basal-plus) or adding a GLP-1 RA/GIP-GLP1 before escalating prandial insulin further.');
+      } else if (!hba1cAlta && enInsulina) {
+        pasos.push('HbA1c not very elevated and already on insulin: maintain the current regimen, watch for hypoglycemia, and consider simplifying or reducing the dose if control is very tight.');
+      } else {
+        pasos.push('HbA1c not very elevated and not on insulin: maintain or start non-insulin treatment per the driver; reassess in 3-6 months before intensifying.');
+      }
+      var html = '<p style="margin-bottom:8px;"><strong>Numbered summary:</strong></p>';
+      html += '<p style="margin-bottom:7px;">1. ' + pasos[0] + '</p>';
+      html += '<p style="margin-bottom:7px;">2. ' + pasos[1] + '</p>';
+      html += '<p style="margin-bottom:7px;">3. Reassess response and tolerability in 3 months; adjust based on HbA1c, TIR (if CGM is in use), and any adverse effects.</p>';
+      html += '<p style="font-size:.72rem;color:var(--text-muted);margin-top:8px;">Source: T2D treatment algorithm, redGDPS 2026. Reference result only — does not replace individual clinical judgment (renal function, allergies, interactions).</p>';
+      out.classList.remove('hidden');
+      out.innerHTML = html;
+      return;
+    }
+
+    if (hba1cAlta && !enInsulina) {
+      pasos.push('HbA1c &gt;8,5% y aún sin insulina: valorar inicio con <strong>doble combinación</strong> desde el principio (p. ej. metformina + iSGLT2/arGLP-1 según condicionante) en vez de monoterapia, para alcanzar el objetivo más rápido y evitar la inercia clínica.');
+    } else if (hba1cAlta && enInsulina) {
+      pasos.push('HbA1c &gt;8,5% ya en insulina: revisar si tiene asociado un fármaco con beneficio cardiorrenal según el condicionante; si no controla, valorar intensificar la pauta (basal-plus) o añadir arGLP-1/GIP-GLP1 antes de escalar más insulina prandial.');
+    } else if (!hba1cAlta && enInsulina) {
+      pasos.push('HbA1c no muy elevada y ya en insulina: mantener pauta actual, vigilar hipoglucemias y valorar si es posible simplificar o reducir dosis si el control es muy ajustado.');
+    } else {
+      pasos.push('HbA1c no muy elevada y sin insulina: mantener o iniciar tratamiento no insulínico según condicionante; reevaluar en 3-6 meses antes de intensificar.');
+    }
+
+    var html = '<p style="margin-bottom:8px;"><strong>Resumen numerado:</strong></p>';
+    html += '<p style="margin-bottom:7px;">1. ' + pasos[0] + '</p>';
+    html += '<p style="margin-bottom:7px;">2. ' + pasos[1] + '</p>';
+    html += '<p style="margin-bottom:7px;">3. Reevaluar respuesta y tolerancia en 3 meses; ajustar según HbA1c, TIR (si hay MCG) y aparición de efectos adversos.</p>';
+    html += '<p style="font-size:.72rem;color:var(--text-muted);margin-top:8px;">Fuente: Algoritmo de tratamiento de la DM2, redGDPS 2026. Resultado orientativo — no sustituye la valoración clínica individual (función renal, alergias, interacciones).</p>';
+    out.classList.remove('hidden');
+    out.innerHTML = html;
+  }
+
+  function wizReset() {
+    wizAnswers = { cond: null, hba1c: null, insulina: null };
+    var opts = document.querySelectorAll('.wiz-opt');
+    for (var i = 0; i < opts.length; i++) { opts[i].classList.remove('picked'); }
+    var out = document.getElementById('wizResultado');
+    if (out) { out.classList.add('hidden'); out.innerHTML = ''; }
+    wizGoToStep(1);
+  }
+
+  function bindWizard() {
+    var opts = document.querySelectorAll('.wiz-opt');
+    if (!opts.length) return;
+    for (var i = 0; i < opts.length; i++) {
+      opts[i].addEventListener('click', function () {
+        var group = this.getAttribute('data-group');
+        var v = this.getAttribute('data-val');
+        wizAnswers[group] = v;
+        var siblings = document.querySelectorAll('.wiz-opt[data-group="' + group + '"]');
+        for (var s = 0; s < siblings.length; s++) { siblings[s].classList.remove('picked'); }
+        this.classList.add('picked');
+
+        if (group === 'cond') { wizGoToStep(2); }
+        else if (group === 'hba1c') { wizGoToStep(3); }
+        else if (group === 'insulina') { wizCompute(); }
+      });
+    }
+    var btnReset = document.getElementById('btnWizReset');
+    if (btnReset) btnReset.addEventListener('click', wizReset);
+    wizGoToStep(1);
+  }
+
+  function val(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+
+  // ============================================================
+  // SERVICE WORKER — caché offline real de la propia página
+  // ============================================================
+  function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) return;
+    var swCode = "" +
+      "var CACHE_NAME='diabesity4-cache-v1';" +
+      "self.addEventListener('install',function(e){" +
+        "self.skipWaiting();" +
+        "e.waitUntil(caches.open(CACHE_NAME).then(function(cache){" +
+          "return cache.add(self.registration.scope).catch(function(){});" +
+        "}));" +
+      "});" +
+      "self.addEventListener('activate',function(e){" +
+        "e.waitUntil(caches.keys().then(function(keys){" +
+          "return Promise.all(keys.filter(function(k){return k!==CACHE_NAME;}).map(function(k){return caches.delete(k);}));" +
+        "}).then(function(){return self.clients.claim();}));" +
+      "});" +
+      "self.addEventListener('fetch',function(e){" +
+        "if(e.request.method!=='GET')return;" +
+        "e.respondWith(caches.match(e.request).then(function(cached){" +
+          "var netFetch=fetch(e.request).then(function(resp){" +
+            "if(resp&&resp.status===200){" +
+              "var clone=resp.clone();" +
+              "caches.open(CACHE_NAME).then(function(cache){cache.put(e.request,clone);});" +
+            "}" +
+            "return resp;" +
+          "}).catch(function(){return cached;});" +
+          "return cached||netFetch;" +
+        "}));" +
+      "});";
+    try {
+      var blob = new Blob([swCode], { type: 'application/javascript' });
+      var swUrl = URL.createObjectURL(blob);
+      navigator.serviceWorker.register(swUrl, { scope: './' }).catch(function () {});
+    } catch (e) {}
+  }
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  document.addEventListener('DOMContentLoaded', function () {
+    bindTabs();
+    bindInstall();
+    bindTratamiento();
+    bindCalculadoraInsulina();
+    bindWizard();
+    bindMCG();
+    bindEjercicio();
+    registerServiceWorker();
+    bindThemeToggle();
+    bindLangToggle();
+  });
+})();
+</script>
+</body>
+</html>
