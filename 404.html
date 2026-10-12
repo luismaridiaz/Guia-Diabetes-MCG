@@ -149,7 +149,10 @@ table.dtab tr:last-child td{border-bottom:none;}
 .mock-unit{font-size:.62rem;color:var(--text-muted);font-weight:500;margin-left:4px;}
 .mock-arrow{font-size:1.8rem;color:var(--accent-2);}
 .mock-caption{text-align:center;font-size:.66rem;color:var(--text-muted);margin-top:2px;margin-bottom:10px;}
-.mock-chart{background:#060d16;border-radius:10px;padding:6px 4px;overflow:hidden;}
+.mock-chart{position:relative;height:78px;background:#060d16;border-radius:10px;overflow:hidden;margin:6px 0 10px;}
+.mock-chart-band{position:absolute;left:0;right:0;top:30%;height:40%;background:rgba(63,174,122,0.14);}
+.mock-chart-gridline{position:absolute;left:0;right:0;height:0;border-top:1px dashed #2a4058;}
+.mock-chart-fill{position:absolute;inset:0;background:linear-gradient(180deg,rgba(111,194,212,0.55),rgba(111,194,212,0.06));}
 .mock-legend{display:flex;justify-content:center;gap:14px;font-size:.62rem;color:var(--text-muted);margin:8px 0 4px;}
 .mock-legend .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;}
 .mock-legend .dot.green{background:var(--green);} .mock-legend .dot.amber{background:var(--amber);} .mock-legend .dot.red{background:var(--red);}
@@ -519,6 +522,24 @@ label.flabel{font-size:.7rem;color:var(--text-muted);display:block;margin-bottom
   </div>
 
 
+<p class="subsection-label">SISTEMAS AVANZADOS: AID SIN TUBOS</p>
+<div class="card">
+    <div class="card-title">🔌 Sistemas sin tubos de asa cerrada (AID) <span class="badge">novedad 2026 · Omnipod 5</span></div>
+    <p class="card-sub">Los sistemas de <b>administración automatizada de insulina</b> (AID; también llamados "asa cerrada híbrida") combinan una bomba de insulina, un sensor de MCG y un algoritmo que recalcula y ajusta la insulina basal cada pocos minutos según la glucosa en tiempo real. El paciente sigue administrando manualmente los bolos de las comidas: no son un "páncreas artificial" totalmente autónomo. Su indicación establecida es la <b>diabetes tipo 1</b>; en DM2 la experiencia es aún muy limitada y no constituye indicación de uso habitual en AP.</p>
+    <p class="card-sub mt-2">Según la <i>Guía de Uso de Sistemas de Asa Cerrada</i> (3ª ed., 2026) de la Sociedad Española de Diabetes (SED-GTTAD), hay <b>cuatro sistemas comerciales</b> disponibles en España:</p>
+    <div class="sensor-grid mt-2">
+      <div class="sensor-card"><div class="name">🔌 Omnipod 5 (Insulet)</div><div class="spec">Único sistema <b>sin tubos</b> ("Pod" adhesivo). Lanzamiento comercial en España: julio de 2026 (20º país con Omnipod 5 disponible). DM1 ≥2 años.</div><span class="tag tag-accent">Sin tubos</span></div>
+      <div class="sensor-card"><div class="name">MiniMed 780G (Medtronic)</div><div class="spec">Bomba con tubo (catéter + cánula). Sistema de asa cerrada híbrida de uso consolidado en DM1.</div><span class="tag">Con tubo</span></div>
+      <div class="sensor-card"><div class="name">Tandem t:slim X2 + Control-IQ</div><div class="spec">Bomba con tubo. Algoritmo predictivo de ajuste de insulina basal y bolo de corrección automático.</div><span class="tag">Con tubo</span></div>
+      <div class="sensor-card"><div class="name">CamAPS FX (mylife YpsoPump)</div><div class="spec">App de asa cerrada que controla la bomba con tubo mylife YpsoPump; único sistema autorizado también en embarazo.</div><span class="tag">Con tubo</span></div>
+    </div>
+    <p class="card-sub mt-2"><b>Omnipod 5 en España:</b> bomba tipo Pod sin tubos, resistente al agua (IP28), cambio cada 3 días; algoritmo que reevalúa la insulina basal cada 5 minutos. Compatible con sensores <b>FreeStyle Libre 2 Plus</b> y <b>Dexcom G7</b> (comprobar compatibilidad vigente; en expansión a otros sensores). El acceso y la financiación pública se están implementando de forma <b>progresiva</b> junto con las autoridades sanitarias y las comunidades autónomas; a diferencia de la MCG en tiempo real aislada —financiada desde 2021 por el SNS en DM1 adulta con hipoglucemias graves o no percibidas en terapia intensiva—, la financiación de los sistemas AID como tales no está aún unificada ni garantizada en todo el territorio: depende de cada hospital/CCAA y de las evaluaciones de la RedETS.</p>
+    <div class="alert-box amber mt-2">
+      ⚠️ <b>Sobre "Medtrum TouchCare Nano" en España:</b> la Guía SED-GTTAD 2026 (la referencia clínica española más actualizada sobre asa cerrada) describe los cuatro sistemas comercializados en España y <b>Medtrum no figura entre ellos</b>. Además, la AEMPS retiró del mercado español (30 de marzo de 2026) el sensor y transmisor del sistema de MCG "A8 TouchCare" de Medtrum, por errores de medición detectados en un estudio de usabilidad en Portugal, con una distribución en España muy limitada (un único centro, en Tenerife); la bomba y el gestor de insulina no se vieron afectados por esa retirada concreta. No hemos podido verificar con fuentes oficiales que el sistema combinado "Medtrum TouchCare Nano" (bomba + MCG + AID) esté comercializado o financiado en España, ni los datos clínicos (p. ej. una supuesta serie de Lleida con 86% de TIR) que circulan al respecto. Antes de usar esta información en consulta, confirmar la disponibilidad real con el fabricante y las autoridades sanitarias.
+    </div>
+    <p class="card-sub mt-2">Fuente: SED-GTTAD, Guía de Uso de Sistemas de Asa Cerrada 2026 (3ª ed.); Insulet, lanzamiento comercial de Omnipod 5 en España (jul. 2026); AEMPS, aviso de retirada del sensor Medtrum A8 TouchCare (30-mar-2026); Resolución de cartera común del SNS sobre MCG en tiempo real (2021) (ver Referencias).</p>
+  </div>
+
 <p class="subsection-label">INDICACIÓN Y EDUCACIÓN</p>
 </div>
 <div class="lang-block" data-lang="en">
@@ -541,6 +562,24 @@ label.flabel{font-size:.7rem;color:var(--text-muted);display:block;margin-bottom
   </div>
 
 
+<p class="subsection-label">ADVANCED SYSTEMS: TUBELESS AID</p>
+<div class="card">
+    <div class="card-title">🔌 Tubeless closed-loop (AID) systems <span class="badge">new in 2026 · Omnipod 5</span></div>
+    <p class="card-sub">Automated insulin delivery (AID) systems — also called "hybrid closed loop" — combine an insulin pump, a CGM sensor, and an algorithm that recalculates and adjusts basal insulin every few minutes based on real-time glucose. The patient still administers meal boluses manually: these are not a fully autonomous "artificial pancreas." Their established indication is <b>type 1 diabetes</b>; experience in T2D is still very limited and does not constitute a routine Primary Care indication.</p>
+    <p class="card-sub mt-2">Per the <i>Guía de Uso de Sistemas de Asa Cerrada</i> (Closed-Loop Systems Usage Guide, 3rd ed., 2026) from the Sociedad Española de Diabetes (SED-GTTAD), there are <b>four commercial systems</b> available in Spain:</p>
+    <div class="sensor-grid mt-2">
+      <div class="sensor-card"><div class="name">🔌 Omnipod 5 (Insulet)</div><div class="spec">The only <b>tubeless</b> system (adhesive "Pod"). Commercial launch in Spain: July 2026 (20th country with Omnipod 5 available). T1D ≥2 years.</div><span class="tag tag-accent">Tubeless</span></div>
+      <div class="sensor-card"><div class="name">MiniMed 780G (Medtronic)</div><div class="spec">Tubed pump (catheter + cannula). Well-established hybrid closed-loop system in T1D.</div><span class="tag">Tubed</span></div>
+      <div class="sensor-card"><div class="name">Tandem t:slim X2 + Control-IQ</div><div class="spec">Tubed pump. Predictive algorithm for basal insulin adjustment and automatic correction boluses.</div><span class="tag">Tubed</span></div>
+      <div class="sensor-card"><div class="name">CamAPS FX (mylife YpsoPump)</div><div class="spec">Closed-loop app controlling the tubed mylife YpsoPump; the only system also authorized in pregnancy.</div><span class="tag">Tubed</span></div>
+    </div>
+    <p class="card-sub mt-2"><b>Omnipod 5 in Spain:</b> tubeless Pod-type pump, waterproof (IP28), changed every 3 days; algorithm re-evaluates basal insulin every 5 minutes. Compatible with <b>FreeStyle Libre 2 Plus</b> and <b>Dexcom G7</b> sensors (check current compatibility; expanding to other sensors). Public access and funding are being rolled out <b>progressively</b> together with health authorities and the autonomous regions (CCAA); unlike standalone real-time CGM — funded since 2021 by the SNS for adult T1D with severe or unnoticed hypoglycemia on intensive therapy — funding for AID systems as such is not yet unified or guaranteed nationwide: it depends on each hospital/region and on RedETS health-technology assessments.</p>
+    <div class="alert-box amber mt-2">
+      ⚠️ <b>On "Medtrum TouchCare Nano" in Spain:</b> the SED-GTTAD 2026 guide (the most current Spanish clinical reference on closed-loop systems) describes the four systems commercialized in Spain, and <b>Medtrum is not among them</b>. Furthermore, Spain's medicines agency (AEMPS) withdrew the Medtrum "A8 TouchCare" CGM sensor and transmitter from the Spanish market (30 March 2026) due to measurement errors found in a Portuguese usability study, with distribution in Spain limited to a single center (in Tenerife); the pump and insulin manager were not affected by that specific recall. We could not independently verify, from official sources, that the combined "Medtrum TouchCare Nano" system (pump + CGM + AID) is commercialized or funded in Spain, nor the clinical data (e.g., a reported Lleida case series with 86% TIR) circulating about it. Confirm actual availability with the manufacturer and health authorities before using this information in clinical practice.
+    </div>
+    <p class="card-sub mt-2">Source: SED-GTTAD, Guía de Uso de Sistemas de Asa Cerrada 2026 (3rd ed.); Insulet, Omnipod 5 commercial launch in Spain (Jul. 2026); AEMPS, Medtrum A8 TouchCare sensor withdrawal notice (30-Mar-2026); SNS common benefits package resolution on real-time CGM (2021) (see References).</p>
+  </div>
+
 <p class="subsection-label">INDICATION AND EDUCATION</p>
 </div>
 <div class="lang-block" data-lang="es">
@@ -554,6 +593,12 @@ label.flabel{font-size:.7rem;color:var(--text-muted);display:block;margin-bottom
         <div class="mock-arrow" title="Tendencia estable">→</div>
       </div>
       <div class="mock-caption">Tendencia estable · última lectura hace 2 min</div>
+      <div class="mock-chart">
+        <div class="mock-chart-band"></div>
+        <div class="mock-chart-gridline" style="top:30%;"></div>
+        <div class="mock-chart-gridline" style="top:70%;"></div>
+        <div class="mock-chart-fill" style="clip-path:polygon(0% 61%,8% 56%,17% 67%,25% 50%,33% 39%,42% 44%,50% 33%,58% 47%,67% 53%,75% 42%,83% 49%,92% 40%,100% 44%,100% 100%,0% 100%);"></div>
+      </div>
       <div class="mock-legend"><span><i class="dot amber"></i>&gt;180</span><span><i class="dot green"></i>70-180</span><span><i class="dot red"></i>&lt;70</span></div>
       <div class="mock-tir">
         <div class="mock-tir-bar"><span style="width:6%;background:var(--red);"></span><span style="width:78%;background:var(--green);"></span><span style="width:16%;background:var(--amber);"></span></div>
@@ -575,6 +620,12 @@ label.flabel{font-size:.7rem;color:var(--text-muted);display:block;margin-bottom
         <div class="mock-arrow" title="Stable trend">→</div>
       </div>
       <div class="mock-caption">Stable trend · last reading 2 min ago</div>
+      <div class="mock-chart">
+        <div class="mock-chart-band"></div>
+        <div class="mock-chart-gridline" style="top:30%;"></div>
+        <div class="mock-chart-gridline" style="top:70%;"></div>
+        <div class="mock-chart-fill" style="clip-path:polygon(0% 61%,8% 56%,17% 67%,25% 50%,33% 39%,42% 44%,50% 33%,58% 47%,67% 53%,75% 42%,83% 49%,92% 40%,100% 44%,100% 100%,0% 100%);"></div>
+      </div>
       <div class="mock-legend"><span><i class="dot amber"></i>&gt;180</span><span><i class="dot green"></i>70-180</span><span><i class="dot red"></i>&lt;70</span></div>
       <div class="mock-tir">
         <div class="mock-tir-bar"><span style="width:6%;background:var(--red);"></span><span style="width:78%;background:var(--green);"></span><span style="width:16%;background:var(--amber);"></span></div>
@@ -1135,7 +1186,11 @@ label.flabel{font-size:.7rem;color:var(--text-muted);display:block;margin-bottom
     <div class="ref-item"><span class="rnum">6.</span> <b>American Diabetes Association.</b> Standards of Care in Diabetes—2025. <i>Diabetes Care</i> 2025;48(Suppl 1):S1-S321. Referencia internacional de objetivos y algoritmo terapéutico.</div>
     <div class="ref-item"><span class="rnum">7.</span> <b>Publicaciones SED</b> — Grupo de Trabajo de Tecnologías Aplicadas a la Diabetes: documentos sobre sistemas de MCG.<br><a href="https://www.sediabetes.org/publicaciones/publicaciones-sed/" target="_blank" rel="noopener">sediabetes.org — Publicaciones →</a></div>
     <div class="ref-item"><span class="rnum">8.</span> <b>Fichas técnicas de fabricante</b> (Abbott FreeStyle Libre, Dexcom) para especificaciones técnicas de cada sensor: duración, frecuencia de lectura, edad mínima aprobada. Consultar siempre la versión vigente en la web del fabricante.</div>
-    <p class="card-sub mt-2" style="border-top:1px solid var(--border);padding-top:10px;">Esta herramienta es de soporte a la decisión clínica y no sustituye el juicio profesional individualizado. Contrastar siempre con el documento original, la ficha técnica vigente y el contexto clínico de cada paciente. La disponibilidad y financiación de fármacos y sistemas de MCG varía según CCAA.</p>
+    <div class="ref-item"><span class="rnum">9.</span> <b>Grupo de Trabajo de Tecnologías Aplicadas a la Diabetes (GTTAD), Sociedad Española de Diabetes.</b> Guía de Uso de Sistemas de Asa Cerrada, 3ª ed., 2026. Describe los cuatro sistemas AID comercializados en España (MiniMed 780G, Tandem t:slim X2 + Control-IQ, CamAPS FX/mylife YpsoPump y Omnipod 5).<br><a href="https://www.sediabetes.org/wp-content/uploads/GTTAD_GUIA_SAC_2026_vF.pdf" target="_blank" rel="noopener">sediabetes.org — Guía de Sistemas de Asa Cerrada 2026 →</a></div>
+    <div class="ref-item"><span class="rnum">10.</span> <b>Insulet Corporation.</b> Insulet Accelerates Global Growth with Launch of Omnipod 5 and Omnipod Discover in Spain (nota de prensa, julio 2026): indicación, sensores compatibles (FreeStyle Libre 2 Plus, Dexcom G7) y acceso progresivo en España.<br><a href="https://www.businesswire.com/news/home/20260706940658/en/Insulet-Accelerates-Global-Growth-with-Launch-of-Omnipod-5-and-Omnipod-Discover-in-Spain-Expanding-Access-to-Tubeless-Diabetes-Technology" target="_blank" rel="noopener">businesswire.com — Lanzamiento Omnipod 5 España →</a></div>
+    <div class="ref-item"><span class="rnum">11.</span> <b>Agencia Española de Medicamentos y Productos Sanitarios (AEMPS).</b> Aviso sobre el cese de comercialización y retirada del mercado del sensor y transmisor del sistema de MCG A8 TouchCare (Medtrum), 30 de marzo de 2026, por errores de medición detectados en Portugal.<br><a href="https://www.aemps.gob.es/informa/la-aemps-informa-del-cese-de-comercializacion-y-retirada-del-mercado-del-sensor-y-transmisor-del-sistema-de-monitorizacion-continua-de-glucosa-a8-touchcare/" target="_blank" rel="noopener">aemps.gob.es — Retirada sensor A8 TouchCare →</a></div>
+    <div class="ref-item"><span class="rnum">12.</span> <b>Ministerio de Sanidad.</b> Resolución de la Comisión de prestaciones, aseguramiento y financiación sobre la financiación de la monitorización continua de glucosa en tiempo real en la cartera común del SNS (2021), para DM1 adulta con hipoglucemias graves o no percibidas en terapia intensiva.<br><a href="https://mirror.mscbs.gob.es/profesionales/prestacionesSanitarias/CarteraDeServicios/ContenidoCS/docs/Resol_MCG_TR.pdf" target="_blank" rel="noopener">mscbs.gob.es — Resolución MCG tiempo real →</a></div>
+    <p class="card-sub mt-2" style="border-top:1px solid var(--border);padding-top:10px;">Esta herramienta es de soporte a la decisión clínica y no sustituye el juicio profesional individualizado. Contrastar siempre con el documento original, la ficha técnica vigente y el contexto clínico de cada paciente. La disponibilidad y financiación de fármacos y sistemas de MCG/AID varía según CCAA.</p>
   </div>
 </div>
 <div class="lang-block" data-lang="en">
@@ -1149,7 +1204,11 @@ label.flabel{font-size:.7rem;color:var(--text-muted);display:block;margin-bottom
     <div class="ref-item"><span class="rnum">6.</span> <b>American Diabetes Association.</b> Standards of Care in Diabetes—2025. <i>Diabetes Care</i> 2025;48(Suppl 1):S1-S321. International reference for targets and treatment algorithm.</div>
     <div class="ref-item"><span class="rnum">7.</span> <b>SED Publications</b> — Diabetes Technology Working Group: documents on CGM systems.<br><a href="https://www.sediabetes.org/publicaciones/publicaciones-sed/" target="_blank" rel="noopener">sediabetes.org — Publications →</a></div>
     <div class="ref-item"><span class="rnum">8.</span> <b>Manufacturer prescribing information</b> (Abbott FreeStyle Libre, Dexcom) for each sensor's technical specifications: duration, reading frequency, approved minimum age. Always check the current version on the manufacturer's website.</div>
-    <p class="card-sub mt-2" style="border-top:1px solid var(--border);padding-top:10px;">This tool is a clinical decision support aid and does not replace individualized professional judgment. Always cross-check against the original document, current prescribing information, and each patient's clinical context. Availability and reimbursement of drugs and CGM systems vary by region/country — the funding and coverage details in this app reflect the Spanish National Health System (SNS) and its autonomous regions (CCAA).</p>
+    <div class="ref-item"><span class="rnum">9.</span> <b>Diabetes Technology Working Group (GTTAD), Sociedad Española de Diabetes.</b> Guía de Uso de Sistemas de Asa Cerrada (Closed-Loop Systems Usage Guide), 3rd ed., 2026. Describes the four AID systems commercialized in Spain (MiniMed 780G, Tandem t:slim X2 + Control-IQ, CamAPS FX/mylife YpsoPump, and Omnipod 5).<br><a href="https://www.sediabetes.org/wp-content/uploads/GTTAD_GUIA_SAC_2026_vF.pdf" target="_blank" rel="noopener">sediabetes.org — Closed-Loop Systems Guide 2026 →</a></div>
+    <div class="ref-item"><span class="rnum">10.</span> <b>Insulet Corporation.</b> Insulet Accelerates Global Growth with Launch of Omnipod 5 and Omnipod Discover in Spain (press release, July 2026): indication, compatible sensors (FreeStyle Libre 2 Plus, Dexcom G7), and progressive access in Spain.<br><a href="https://www.businesswire.com/news/home/20260706940658/en/Insulet-Accelerates-Global-Growth-with-Launch-of-Omnipod-5-and-Omnipod-Discover-in-Spain-Expanding-Access-to-Tubeless-Diabetes-Technology" target="_blank" rel="noopener">businesswire.com — Omnipod 5 Spain launch →</a></div>
+    <div class="ref-item"><span class="rnum">11.</span> <b>Spanish Agency of Medicines and Medical Devices (AEMPS).</b> Notice on the discontinuation and market withdrawal of the Medtrum A8 TouchCare CGM sensor and transmitter, 30 March 2026, due to measurement errors detected in Portugal.<br><a href="https://www.aemps.gob.es/informa/la-aemps-informa-del-cese-de-comercializacion-y-retirada-del-mercado-del-sensor-y-transmisor-del-sistema-de-monitorizacion-continua-de-glucosa-a8-touchcare/" target="_blank" rel="noopener">aemps.gob.es — A8 TouchCare sensor withdrawal →</a></div>
+    <div class="ref-item"><span class="rnum">12.</span> <b>Spanish Ministry of Health.</b> Resolution on funding of real-time continuous glucose monitoring within the SNS common benefits package (2021), for adult T1D with severe or unnoticed hypoglycemia on intensive insulin therapy.<br><a href="https://mirror.mscbs.gob.es/profesionales/prestacionesSanitarias/CarteraDeServicios/ContenidoCS/docs/Resol_MCG_TR.pdf" target="_blank" rel="noopener">mscbs.gob.es — Real-time CGM funding resolution →</a></div>
+    <p class="card-sub mt-2" style="border-top:1px solid var(--border);padding-top:10px;">This tool is a clinical decision support aid and does not replace individualized professional judgment. Always cross-check against the original document, current prescribing information, and each patient's clinical context. Availability and reimbursement of drugs and CGM/AID systems vary by region/country — the funding and coverage details in this app reflect the Spanish National Health System (SNS) and its autonomous regions (CCAA).</p>
   </div>
 </div>
 
